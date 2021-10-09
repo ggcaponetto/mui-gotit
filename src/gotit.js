@@ -2,16 +2,24 @@ import * as React from 'react';
 import {
   useEffect, useState, useRef, useCallback, useReducer,
 } from 'react';
+import * as loglevel from 'loglevel';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
-/** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
 import { v4 as uuidv4 } from 'uuid';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import { Typography } from '@mui/material';
 import Slide from '@mui/material/Slide';
+/** @jsxImportSource @emotion/react */
+
+const log = loglevel.getLogger('gotit.js');
+
+if (process.env.NODE_ENV === 'production') {
+  log.setLevel(log.levels.WARN);
+} else {
+  log.setLevel(log.levels.DEBUG);
+}
 
 const defaultContext = {
   actions: {
@@ -25,9 +33,11 @@ const defaultContext = {
 const GotitContext = React.createContext(defaultContext);
 
 const reducer = (prevState, action) => {
-  console.debug(`debug gotit - reducer ${action.type}`, { prevState, action });
+  const fnName = 'Gotit';
+  log.debug(`${fnName} - reducer ${action.type} - old state`, { prevState, action });
   if (action.type === defaultContext.actions.replace) {
     const newState = { ...prevState, ...action.payload };
+    log.debug(`${fnName} - reducer ${action.type} - new state`, { action, prevState, newState });
     return newState;
   }
   if (action.type === defaultContext.actions.addNotification) {
@@ -38,6 +48,7 @@ const reducer = (prevState, action) => {
         action.payload.notification,
       ],
     };
+    log.debug(`${fnName} - reducer ${action.type} - new state`, { action, prevState, newState });
     return newState;
   }
   if (action.type === defaultContext.actions.removeNotification) {
@@ -48,12 +59,14 @@ const reducer = (prevState, action) => {
           .filter((option) => option.gotit.id !== action.payload.notification.gotit.id),
       ],
     };
+    log.debug(`${fnName} - reducer ${action.type} - new state`, { action, prevState, newState });
     return newState;
   }
   throw new Error('cannot handle action in reducer');
 };
 
-function Gotit(props) {
+function GotitBase(props) {
+  const fnName = 'Gotit';
   const [options, setOptions] = useState({
     debug: true,
     maxSnackbars: 5,
@@ -65,7 +78,7 @@ function Gotit(props) {
     ...defaultContext,
   });
   const snackbarArrayRef = useRef([]);
-  const notify = useCallback((option) => {
+  const displayNotification = useCallback((option) => {
     const newOption = {
       ...option,
       gotit: {
@@ -82,16 +95,25 @@ function Gotit(props) {
   }, []);
 
   useEffect(() => {
+    log.debug(`${fnName} - useEffect - []`, props);
+  }, []);
+
+  useEffect(() => {
+    log.debug(`${fnName} - useEffect - [state]`, { state });
+  }, [state]);
+
+  useEffect(() => {
+    log.debug(`${fnName} - useEffect - [displayNotification]`, { displayNotification });
     dispatch({
       type: state.actions.replace,
       payload: {
-        notify,
+        displayNotification,
       },
     });
-  }, [notify]);
+  }, [displayNotification]);
 
   const getDebugUi = useCallback((ctx) => {
-    if (ctx.notify) {
+    if (ctx.displayNotification) {
       return (
         <div style={{
           position: 'fixed', top: 0, right: 0, zIndex: 999,
@@ -105,8 +127,8 @@ function Gotit(props) {
           <button
             type="button"
             onClick={() => {
-              console.debug('debug gotit - debug onClick', { ctx });
-              notify({
+              log.debug(`${fnName} - onClick`, { ctx });
+              displayNotification({
                 snackbar: {
                   open: true,
                   autoHideDuration: 5000,
@@ -132,35 +154,20 @@ function Gotit(props) {
           <button
             type="button"
             onClick={() => {
-              console.debug('debug gotit - debug onClick', { ctx });
-              const style = css`
-                .MuiSnackbarContent-root{
-                  color: blue;
-                }
-                .MuiSnackbarContent-action{
-                  color: purple;
-                  width: 100%;
-                  margin: 0;
-                  padding: 0;
-                }
-                .MuiSnackbarContent-message{
-                  color: brown";
-                  width: 100%;
-                  margin: 0;
-                  padding: 0;
-                }
-              `;
+              log.debug(`${fnName} - onClick`, { props });
               const gotitOptions = {
                 snackbar: {
                   open: true,
                   autoHideDuration: 5000,
                   anchorOrigin: { vertical: 'top', horizontal: 'right' },
+                  /*
                   ContentProps: {
                     style: {
-                      // color: 'green',
+                      color: 'green',
                     },
                   },
-                  css: style,
+                  */
+                  css: props.emotionCss,
                   TransitionComponent: Slide,
                   action: (
                     <div style={{
@@ -208,7 +215,7 @@ function Gotit(props) {
                   ),
                 },
               };
-              notify(gotitOptions);
+              displayNotification(gotitOptions);
             }}
           >
             test action
@@ -220,7 +227,7 @@ function Gotit(props) {
   }, []);
 
   const close = useCallback((event, reason, option) => {
-    console.log('gotit - onClose', {
+    log.debug(`${fnName} - close`, {
       reason, id: option.gotit.id, option, event,
     });
     if (reason === 'timeout') {
@@ -286,5 +293,5 @@ function Gotit(props) {
 
 export {
   GotitContext,
-  Gotit,
+  GotitBase,
 };

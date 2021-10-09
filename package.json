@@ -1,19 +1,22 @@
 {
   "name": "mui-gotit",
-  "version": "1.0.0",
+  "version": "1.0.17",
   "description": "Stacked Snackbars for Material UI",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Giuseppe Giulio Caponetto",
+  "homepage": "https://github.com/ggcaponetto/mui-gotit#readme",
   "license": "MIT",
   "peerDependencies": {
-    "@emotion/react": "^11.4.1",
-    "@emotion/styled": "^11.3.0",
-    "@mui/icons-material": "^5.0.3",
-    "@mui/material": "^5.0.3",
-    "react": "^17.0.2",
-    "uuid": "^8.3.2"
-  }
+    "@emotion/react": ">= 11.4.1",
+    "@emotion/styled": ">= 11.3.0",
+    "@mui/icons-material": ">= 5.0.3",
+    "@mui/material": ">= 5.0.3",
+    "react": ">= 17.0.2",
+    "uuid": ">= 8.3.2",
+    "loglevel": ">= 1.7.1"
+  },
+  "dependencies": {}
 }

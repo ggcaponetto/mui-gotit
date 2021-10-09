@@ -1,0 +1,18 @@
+/* eslint-disable */
+import * as React from 'react';
+/** @jsx jsx */
+import { jsx, css } from '@emotion/react';
+import { Gotit as GotitBase, GotitContext } from './gotit';
+
+function Gotit(props) {
+  return (
+    <GotitBase
+      css={css}
+    />
+  );
+}
+
+export {
+  GotitContext,
+  Gotit,
+};
