@@ -1,9 +1,10 @@
 {
   "name": "mui-gotit",
-  "version": "1.0.24",
+  "version": "1.0.28",
   "description": "Stacked Snackbars for Material UI",
-  "main": "./src/index.js",
+  "main": "./dist/gotit-pragma-automatic.js",
   "scripts": {
+    "build": "webpack --config ./webpack.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Giuseppe Giulio Caponetto",
@@ -14,10 +15,22 @@
     "@emotion/styled": ">= 11.3.0",
     "@mui/icons-material": ">= 5.0.3",
     "@mui/material": ">= 5.0.3",
-    "react": ">= 17.0.2",
+    "react": ">= 17.0.2"
+  },
+  "dependencies": {
     "uuid": ">= 8.3.2",
     "loglevel": ">= 1.7.1"
   },
-  "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "@babel/core": "^7.15.8",
+    "@babel/plugin-transform-react-jsx": "^7.14.9",
+    "@babel/preset-env": "^7.15.8",
+    "@babel/preset-react": "^7.14.5",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^6.4.0",
+    "rimraf": "^3.0.2",
+    "style-loader": "^3.3.0",
+    "webpack": "^5.58.1",
+    "webpack-cli": "^4.9.0"
+  }
 }
