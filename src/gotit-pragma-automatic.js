@@ -292,7 +292,7 @@ function Gotit(props) {
   );
 }
 
-module.exports = {
+export {
   GotitContext,
   Gotit,
 };

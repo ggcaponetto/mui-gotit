@@ -5,7 +5,7 @@
   "main": "./dist/gotit-pragma-automatic.js",
   "scripts": {
     "build": "webpack --config ./webpack.config.js",
-    "npm-autopub": "npm run build && npm version patch && npm publish",
+    "npm-autopub": "npm run git-auto && npm run build && npm version patch && npm publish",
     "git-auto": "git add . && git commit -m \"autobuild\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
