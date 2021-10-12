@@ -2,12 +2,12 @@
   "name": "mui-gotit",
   "version": "1.0.58",
   "description": "Stacked Snackbars for Material UI",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
+  "main": "dist/cjs/src/index.js",
+  "module": "dist/esm/src/index.js",
   "scripts": {
     "webpack": "webpack --config ./webpack.config.js",
     "rollup": "rollup --config rollup.config.js",
-    "npm-autopub": "npm run git-auto && npm run build && npm version patch && npm publish",
+    "npm-autopub": "npm run git-auto && npm run rollup && npm version patch && npm publish",
     "git-auto": "git add . && git commit -m \"autobuild\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
