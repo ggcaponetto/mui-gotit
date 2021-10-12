@@ -12,7 +12,7 @@ module.exports = {
   target: 'web',
   output: {
     library: {
-      name: "my-var",
+      name: "MUIGotit",
       type: 'var',
     },
     filename: '[name].js',
