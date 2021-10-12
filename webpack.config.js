@@ -10,10 +10,6 @@ module.exports = {
   },
   mode: 'production',
   target: 'es5',
-  experiments: {
-    outputModule: true,
-  },
-  externalsType: 'module',
   output: {
     chunkFormat: 'commonjs',
     library: {
