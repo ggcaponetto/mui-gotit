@@ -1,10 +1,12 @@
 {
   "name": "mui-gotit",
-  "version": "1.0.28",
+  "version": "1.0.32",
   "description": "Stacked Snackbars for Material UI",
   "main": "./dist/gotit-pragma-automatic.js",
   "scripts": {
     "build": "webpack --config ./webpack.config.js",
+    "npm-autopub": "npm run build && npm version patch && npm publish",
+    "git-auto": "git add . && git commit -m \"autobuild\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Giuseppe Giulio Caponetto",
@@ -23,6 +25,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.15.8",
+    "@babel/plugin-transform-modules-commonjs": "^7.15.4",
     "@babel/plugin-transform-react-jsx": "^7.14.9",
     "@babel/preset-env": "^7.15.8",
     "@babel/preset-react": "^7.14.5",

@@ -4,17 +4,15 @@ module.exports = {
   entry: {
     'gotit-pragma-automatic': './src/gotit-pragma-automatic.js'
   },
-  mode: 'production',
-  experiments: {
-    outputModule: true,
+  resolve: {
+    modules: [__dirname, 'node_modules'],
   },
-  externalsType: 'module',
-  target: ['es2020'],
+  mode: 'production',
+  target: 'node',
   output: {
     library: {
       name: 'MUIGotit',
-      type: 'var',
-      export: ['default'],
+      type: 'commonjs',
     },
     filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
@@ -48,9 +46,6 @@ module.exports = {
   externals: [
     {
       react: 'react',
-    },
-    {
-      reactDOM: 'react-dom',
     },
     /^@mui/,
     /^@emotion/,
