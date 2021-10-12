@@ -1,6 +1,7 @@
 {
     "presets": [
         [
+            "@babel/plugin-transform-runtime",
             "@babel/preset-react",
             {
                 "throwIfNamespace": false,
