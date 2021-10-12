@@ -1,10 +1,6 @@
-import { Gotit as GotitLib} from './gotit-pragma-automatic'
-import { GotitContext as GotitContextLib } from './gotit-pragma-automatic';
-
-export default {
-  Gotit: GotitLib,
-};
-
-export default {
-  GotitContext: GotitContextLib,
-};
+import { Gotit } from './gotit-pragma-automatic'
+import { GotitContext } from './gotit-pragma-automatic';
+return {
+  GotitContext,
+  Gotit
+}
