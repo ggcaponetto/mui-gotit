@@ -12,6 +12,7 @@ module.exports = {
   target: 'web',
   output: {
     library: {
+      name: "my-var",
       type: 'var',
     },
     filename: '[name].js',
