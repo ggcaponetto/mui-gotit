@@ -12,7 +12,7 @@ module.exports = {
   target: 'web',
   output: {
     library: {
-      type: 'commonjs2',
+      type: 'var',
     },
     filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
