@@ -2,6 +2,7 @@ const path = require('path');
 
 module.exports = {
   entry: {
+    'index': "./src/index.js",
     'gotit-pragma-automatic': './src/gotit-pragma-automatic.js'
   },
   resolve: {
