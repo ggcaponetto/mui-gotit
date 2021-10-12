@@ -26,6 +26,9 @@ export default {
     resolve(),
     babel({
 
+    }),
+    commonjs({
+      include: 'node_modules/**',
     })
   ],
   external: [
