@@ -27,9 +27,19 @@ export default {
     }
   ],
   plugins: [
-    resolve(),
-    babel({}),
-    commonjs()
+    resolve({
+      // pass custom options to the resolve plugin
+      customResolveOptions: {
+        moduleDirectory: 'node_modules'
+      }
+    }),
+    babel({ babelHelpers: 'bundled' }),
+    commonjs({
+      dynamicRequireTargets: [
+        // include using a glob pattern (either a string or an array of strings)
+        'node_modules/loglevel/**'
+      ]
+    })
   ],
   external: [
     "react",

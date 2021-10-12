@@ -6,7 +6,7 @@
   "module": "dist/esm/index.js",
   "scripts": {
     "webpack": "webpack --config ./webpack.config.js",
-    "rollup": "rollup --config rollup.config.js",
+    "rollup": "rimraf dist && rollup --config rollup.config.js",
     "npm-autopub": "npm run git-auto && npm run rollup && npm version patch && npm publish",
     "git-auto": "git add . && git commit -m \"autobuild\"",
     "test": "echo \"Error: no test specified\" && exit 1"
