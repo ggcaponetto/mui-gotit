@@ -1,7 +1,5 @@
-import { Gotit } from './gotit-pragma-automatic'
-import { GotitContext } from './gotit-pragma-automatic';
+import { Gotit as Gotit_} from './gotit-pragma-automatic'
+import { GotitContext as GotitContext_ } from './gotit-pragma-automatic';
 
-module.exports = {
-  Gotit,
-  GotitContext,
-};
+export const Gotit = Gotit_
+export const GotitContext = GotitContext_
