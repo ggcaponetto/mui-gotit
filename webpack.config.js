@@ -9,11 +9,11 @@ module.exports = {
     modules: [__dirname, 'node_modules'],
   },
   mode: 'production',
-  target: 'node',
+  target: 'web',
   output: {
     library: {
       name: "MUIGotit",
-      type: 'var',
+      type: 'umd',
     },
     filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
