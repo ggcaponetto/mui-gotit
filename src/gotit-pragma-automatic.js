@@ -31,7 +31,7 @@ const defaultContext = {
   },
   notifications: [],
 };
-const GotitContext = React.createContext(defaultContext);
+export const GotitContext = React.createContext(defaultContext);
 
 const reducer = (prevState, action) => {
   const fnName = 'Gotit';
@@ -66,7 +66,7 @@ const reducer = (prevState, action) => {
   throw new Error('cannot handle action in reducer');
 };
 
-function Gotit(props) {
+export function Gotit(props) {
   const fnName = 'Gotit';
   const [options, setOptions] = useState({
     debug: true,
@@ -291,8 +291,3 @@ function Gotit(props) {
     </div>
   );
 }
-
-export {
-  GotitContext,
-  Gotit,
-};

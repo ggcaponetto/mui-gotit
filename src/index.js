@@ -1,2 +1,5 @@
-export {default as Gotit} from './gotit-pragma-automatic';
-export {default as GotitContext} from './gotit-pragma-automatic';
+import { Gotit } from './gotit-pragma-automatic'
+import { GotitContext } from './gotit-pragma-automatic';
+
+const lib = { GotitContext, Gotit }
+export default lib;
