@@ -9,7 +9,7 @@ module.exports = {
     modules: [__dirname, 'node_modules'],
   },
   mode: 'production',
-  target: 'node',
+  target: 'es5',
   experiments: {
     outputModule: true,
   },
