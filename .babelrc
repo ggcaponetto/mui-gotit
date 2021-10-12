@@ -1,0 +1,12 @@
+{
+    "presets": [
+        [
+            "@babel/preset-react",
+            {
+                "throwIfNamespace": false,
+                "runtime": "automatic",
+                "importSource": "custom-jsx-library"
+            }
+        ]
+    ]
+}
