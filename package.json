@@ -2,7 +2,7 @@
   "name": "mui-gotit",
   "version": "1.0.37",
   "description": "Stacked Snackbars for Material UI",
-  "main": "./dist/gotit-pragma-automatic.js",
+  "module": "./dist/gotit-pragma-automatic.js",
   "scripts": {
     "build": "webpack --config ./webpack.config.js",
     "npm-autopub": "npm run git-auto && npm run build && npm version patch && npm publish",

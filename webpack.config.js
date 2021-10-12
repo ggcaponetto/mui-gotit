@@ -11,8 +11,7 @@ module.exports = {
   target: 'web',
   output: {
     library: {
-      name: 'MUIGotit',
-      type: 'commonjs2',
+      type: 'module',
     },
     filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
