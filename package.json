@@ -2,8 +2,8 @@
   "name": "mui-gotit",
   "version": "1.0.62",
   "description": "Stacked Snackbars for Material UI",
-  "main": "dist/cjs/src/index.js",
-  "module": "dist/esm/src/index.js",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
   "scripts": {
     "webpack": "webpack --config ./webpack.config.js",
     "rollup": "rollup --config rollup.config.js",
