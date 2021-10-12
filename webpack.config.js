@@ -16,7 +16,6 @@ module.exports = {
   externalsType: 'module',
   output: {
     library: {
-      name: "MUIGotit",
       type: 'commonjs'
     },
     filename: '[name].js',
