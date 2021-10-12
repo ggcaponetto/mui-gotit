@@ -2,7 +2,7 @@ import { Gotit } from './gotit-pragma-automatic'
 import { GotitContext } from './gotit-pragma-automatic';
 
 (()=>{
-  return {
+  module.exports = {
     GotitContext,
     Gotit
   }
