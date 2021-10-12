@@ -9,6 +9,9 @@ module.exports = {
   },
   mode: 'production',
   target: 'web',
+  experiments: {
+    outputModule: true,
+  },
   output: {
     library: {
       type: 'module',
