@@ -33,11 +33,11 @@ export default {
         moduleDirectory: 'node_modules'
       }
     }),
-    babel({ babelHelpers: 'bundled' }),
+    babel({ babelHelpers: 'runtime' }),
     commonjs({
       dynamicRequireTargets: [
         // include using a glob pattern (either a string or an array of strings)
-        'node_modules/loglevel/**'
+        'node_modules/loglevel/*.js'
       ]
     })
   ],
