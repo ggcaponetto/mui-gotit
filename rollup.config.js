@@ -15,6 +15,7 @@ export default {
       sourcemap: true,
       name: 'MUIGotit',
       preserveModules: true,
+      preserveModulesRoot: 'src'
     },
     {
       dir: "dist/esm",
@@ -22,6 +23,7 @@ export default {
       sourcemap: true,
       name: 'MUIGotit',
       preserveModules: true,
+      preserveModulesRoot: 'src'
     }
   ],
   plugins: [
