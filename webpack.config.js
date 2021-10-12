@@ -10,10 +10,14 @@ module.exports = {
   },
   mode: 'production',
   target: 'web',
+  experiments: {
+    outputModule: true,
+  },
+  externalsType: 'module',
   output: {
     library: {
       name: "MUIGotit",
-      type: 'umd',
+      type: 'umd'
     },
     filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
