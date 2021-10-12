@@ -1,6 +1,6 @@
 {
   "name": "mui-gotit",
-  "version": "1.0.52",
+  "version": "1.0.53",
   "description": "Stacked Snackbars for Material UI",
   "main": "./dist/index.js",
   "scripts": {
