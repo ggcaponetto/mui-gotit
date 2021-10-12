@@ -12,7 +12,7 @@ module.exports = {
   output: {
     library: {
       name: 'MUIGotit',
-      type: 'var',
+      type: 'commonjs2',
     },
     filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
