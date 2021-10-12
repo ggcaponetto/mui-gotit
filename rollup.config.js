@@ -21,7 +21,6 @@ export default {
       sourcemap: true
     }
   ],
-  preserveModules: true,
   plugins: [
     resolve(),
     babel({
