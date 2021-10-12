@@ -8,13 +8,13 @@ module.exports = {
     modules: [__dirname, 'node_modules'],
   },
   mode: 'production',
-  target: 'es2015',
+  target: 'web',
   experiments: {
     outputModule: true,
   },
   output: {
     library: {
-      type: 'module',
+      type: 'commonjs',
     },
     filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
