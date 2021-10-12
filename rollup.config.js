@@ -28,12 +28,8 @@ export default {
   ],
   plugins: [
     resolve(),
-    babel({
-
-    }),
-    commonjs({
-      include: 'node_modules/**',
-    })
+    babel({}),
+    commonjs()
   ],
   external: [
     "react",
