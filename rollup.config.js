@@ -39,7 +39,10 @@ export default {
       babelHelpers: 'runtime'
     }),
     commonjs({
-
+      dynamicRequireTargets: [
+        // include using a glob pattern (either a string or an array of strings)
+        'node_modules/loglevel/*.js'
+      ]
     })
   ],
   external: [
