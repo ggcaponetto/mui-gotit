@@ -1,6 +1,6 @@
 {
   "name": "mui-gotit",
-  "version": "1.0.69",
+  "version": "1.0.70",
   "description": "Stacked Snackbars for Material UI",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
