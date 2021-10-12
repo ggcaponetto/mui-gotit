@@ -17,7 +17,7 @@ module.exports = {
   output: {
     library: {
       name: "MUIGotit",
-      type: 'umd'
+      type: 'commonjs'
     },
     filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
