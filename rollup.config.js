@@ -13,12 +13,15 @@ export default {
       dir: "dist/cjs",
       format: 'cjs',
       sourcemap: true,
-      name: 'MUIGotit'
+      name: 'MUIGotit',
+      preserveModules: true,
     },
     {
       dir: "dist/esm",
       format: 'esm',
-      sourcemap: true
+      sourcemap: true,
+      name: 'MUIGotit',
+      preserveModules: true,
     }
   ],
   plugins: [
