@@ -3,6 +3,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import { babel } from '@rollup/plugin-babel';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import jsx from 'rollup-plugin-jsx'
+import path from "path";
 
 const packageJson = require('./package.json');
 
@@ -33,7 +34,10 @@ export default {
         moduleDirectory: 'node_modules'
       }
     }),
-    babel({ babelHelpers: 'runtime' }),
+    babel({
+      configFile: path.resolve(__dirname, '.babelrc'),
+      babelHelpers: 'runtime'
+    }),
     commonjs({
       dynamicRequireTargets: [
         // include using a glob pattern (either a string or an array of strings)
