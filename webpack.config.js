@@ -15,6 +15,7 @@ module.exports = {
   },
   externalsType: 'module',
   output: {
+    chunkFormat: 'commonjs',
     library: {
       type: 'commonjs'
     },
