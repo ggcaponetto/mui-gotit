@@ -12,6 +12,8 @@ export default {
       format: 'cjs',
       sourcemap: true,
       name: 'MUIGotit',
+      preserveModules: true,
+      preserveModulesRoot: 'src'
     },
     {
       exports: "auto",
@@ -19,9 +21,18 @@ export default {
       format: 'esm',
       sourcemap: true,
       name: 'MUIGotit',
+      preserveModules: true,
+      preserveModulesRoot: 'src'
     }
   ],
   plugins: [
+    babel({
+      configFile: path.resolve(__dirname, 'babel.config.json'),
+      babelHelpers: 'runtime'
+    }),
+    commonjs({
+
+    }),
     resolve({
       // pass custom options to the resolve plugin
       customResolveOptions: {
@@ -30,16 +41,6 @@ export default {
         ]
       }
     }),
-    babel({
-      configFile: path.resolve(__dirname, '.babelrc'),
-      babelHelpers: 'runtime'
-    }),
-    commonjs({
-      exclude: [],
-      include: [
-        /node_modules/
-      ]
-    })
   ],
   external: [
     "react",
