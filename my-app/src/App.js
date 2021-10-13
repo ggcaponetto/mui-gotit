@@ -4,6 +4,7 @@ import { Gotit, GotitContext } from "mui-gotit";
 import { useContext } from 'react'
 /** @jsxImportSource @emotion/react */
 import { css, jsx } from '@emotion/react'
+import Alert from '@mui/material/Alert'
 
 function ExampleNotificator(){
   const gotitContext = useContext(GotitContext);
@@ -16,16 +17,29 @@ function ExampleNotificator(){
             open: true,
             autoHideDuration: 500000,
             anchorOrigin: { vertical: 'top', horizontal: 'right' },
-            emotionCssString:`
-            .MuiAlert-message {
-              color: orange;
-            }`,
           },
           gotit: {
+            emotionCssString: `
+                  color: red;
+                  .MuiSnackbar-root {
+                    color: red;
+                  }
+                  .MuiSnackbarContent-root {
+                    color: orange;
+                  }
+                  .MuiSnackbarContent-message {
+                    color: orange;
+                  }
+                  .MuiSnackbarContent-action {
+                    color: orange;
+                  }
+                  `,
             component: (
-              <div>
-                {`a simple mui-gotit snack `}{Math.random()}
-              </div>
+              <Alert severity={"error"} sx={{ backgroundColor: 'green.main' }}>
+                <div css={css`color: blue`}>
+                  {`a simple mui-gotit snack `}{Math.random()}
+                </div>
+              </Alert>
             ),
           },
         });

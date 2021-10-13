@@ -8,7 +8,7 @@
     "@mui/icons-material": "5.0.3",
     "@mui/material": "5.0.3",
     "cra-template": "1.1.2",
-    "mui-gotit": "^1.0.88",
+    "mui-gotit": "^1.0.89",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
@@ -18,7 +18,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "link": "npm link ../"
   },
   "eslintConfig": {
     "extends": [

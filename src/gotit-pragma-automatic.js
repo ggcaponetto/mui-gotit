@@ -135,11 +135,22 @@ function Gotit(props) {
                   autoHideDuration: 5000,
                   anchorOrigin: { vertical: 'top', horizontal: 'right' },
                 },
-                alert: {
-                  severity: 'success',
-                  sx: { color: 'secondary.main' },
-                },
                 gotit: {
+                  emotionCssString: `
+                  color: red;
+                  .MuiSnackbar-root {
+                    color: red;
+                  }
+                  .MuiSnackbarContent-root {
+                    color: orange;
+                  }
+                  .MuiSnackbarContent-message {
+                    color: orange;
+                  }
+                  .MuiSnackbarContent-action {
+                    color: orange;
+                  }
+                  `,
                   component: (
                     <div>
                       141x
@@ -150,7 +161,7 @@ function Gotit(props) {
               });
             }}
           >
-            test custom component
+            test simple component
           </button>
           <button
             type="button"
@@ -194,10 +205,6 @@ function Gotit(props) {
                       </IconButton>
                     </div>
                   ),
-                },
-                alert: {
-                  severity: 'success',
-                  sx: { color: 'secondary.main' },
                 },
                 gotit: {
                   component: (
@@ -257,27 +264,17 @@ function Gotit(props) {
                     }, 0) || 0;
                   return sign * (shift + options.padding);
                 })()}px)`,
-                transition: options.transition || 'all 1s',
+                transition: options.transition || 'all 1.2s',
               }}
               onClose={(event, reason) => {
                 close(event, reason, option);
               }}
               {...option.snackbar}
-              css={css`${option.snackbar.emotionCssString}`}
+              css={
+                css`${option.gotit.emotionCssString}`
+              }
             >
-              {(() => {
-                if (option.gotit.component && !!option.snackbar.action === false) {
-                  return (
-                    <Alert
-                      key={option.gotit.id}
-                      {...option.alert}
-                    >
-                      {option.gotit.component}
-                    </Alert>
-                  );
-                }
-                return null;
-              })()}
+              {option.gotit.component}
             </Snackbar>
           ))}
       </GotitContext.Provider>

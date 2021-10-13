@@ -6,6 +6,8 @@
   "module": "dist/esm/index.js",
   "scripts": {
     "start": "cd my-app && npm start",
+    "watch": "nodemon --watch src --exec \"npm run autobuild\"",
+    "autobuild": "npm run rollup && cd my-app && npm run link && cd ..",
     "rollup": "rimraf dist && rollup --config rollup.config.js",
     "npm-autopub": "npm run git-auto && npm run rollup && npm version patch && npm publish",
     "git-auto": "git add . && git commit -m \"autobuild\"",
@@ -38,6 +40,7 @@
     "@rollup/plugin-node-resolve": "^13.0.5",
     "babel-loader": "^8.2.2",
     "css-loader": "^6.4.0",
+    "nodemon": "^2.0.13",
     "rimraf": "^3.0.2",
     "rollup": "^2.58.0",
     "rollup-plugin-jsx": "^1.0.3",
