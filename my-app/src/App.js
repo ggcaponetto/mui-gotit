@@ -2,6 +2,13 @@ import logo from './logo.svg';
 import './App.css';
 import { Gotit, CotitContext } from "mui-gotit";
 
+function ExampleNotificator(){
+  return (
+    <div>
+      example component using mui-gotit
+    </div>
+  )
+}
 function App() {
   return (
     <div className="App">
@@ -18,6 +25,9 @@ function App() {
         >
           Learn React
         </a>
+        <Gotit>
+          <ExampleNotificator/>
+        </Gotit>
       </header>
     </div>
   );

@@ -11,18 +11,14 @@ export default {
       dir: "dist/cjs",
       format: 'cjs',
       sourcemap: true,
-      name: 'MUIGotit',
-      preserveModules: true,
-      preserveModulesRoot: 'src'
+      preserveModules: true
     },
     {
       exports: "auto",
       dir: "dist/esm",
       format: 'esm',
       sourcemap: true,
-      name: 'MUIGotit',
-      preserveModules: true,
-      preserveModulesRoot: 'src'
+      preserveModules: true
     }
   ],
   plugins: [
