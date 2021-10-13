@@ -16,12 +16,6 @@ import { css, jsx } from '@emotion/react'
 
 const log = loglevel.getLogger('gotit.js');
 
-if (process.env.NODE_ENV === 'production') {
-  log.setLevel(log.levels.WARN);
-} else {
-  log.setLevel(log.levels.DEBUG);
-}
-
 const defaultContext = {
   actions: {
     replace: 'replace',
@@ -42,10 +36,15 @@ const reducer = (prevState, action) => {
     return newState;
   }
   if (action.type === defaultContext.actions.addNotification) {
+    let max = action.payload.notification.gotit.maxSnackbars;
+    let capped = prevState.notifications;
+    if(prevState.notifications.length >= max){
+      capped = capped.slice(-1 * (max-1));
+    }
     const newState = {
       ...prevState,
       notifications: [
-        ...prevState.notifications,
+        ...capped,
         action.payload.notification,
       ],
     };
@@ -69,10 +68,7 @@ const reducer = (prevState, action) => {
 function Gotit(props) {
   const fnName = 'Gotit';
   const [options, setOptions] = useState({
-    debug: true,
-    maxSnackbars: 5,
-    padding: 5,
-    stackDirection: 'bottom',
+    debug: props.debug || false,
     ...props,
   });
   const [state, dispatch] = useReducer(reducer, {
@@ -100,6 +96,14 @@ function Gotit(props) {
   }, []);
 
   useEffect(() => {
+    if(props.debug){
+      log.setLevel(log.levels.DEBUG);
+    } else {
+      log.setLevel(log.levels.WARN);
+    }
+  }, [props.debug])
+
+  useEffect(() => {
     log.debug(`${fnName} - useEffect - [state]`, { state });
   }, [state]);
 
@@ -112,119 +116,6 @@ function Gotit(props) {
       },
     });
   }, [displayNotification]);
-
-  const getDebugUi = useCallback((ctx) => {
-    if (ctx.displayNotification) {
-      return (
-        <div style={{
-          position: 'fixed', top: 0, right: 0, zIndex: 999,
-        }}
-        >
-          <span style={{ color: 'white' }}>
-            {/* {JSON.stringify(ctx.notifications)} */}
-          </span>
-          {/* eslint-disable-next-line max-len */}
-          {/* eslint-disable-next-line jsx-a11y/control-has-associated-label,react/button-has-type */}
-          <button
-            type="button"
-            onClick={() => {
-              log.debug(`${fnName} - onClick`, { ctx });
-              displayNotification({
-                snackbar: {
-                  open: true,
-                  autoHideDuration: 5000,
-                  anchorOrigin: { vertical: 'top', horizontal: 'right' },
-                },
-                gotit: {
-                  emotionCssString: `
-                  color: red;
-                  .MuiSnackbar-root {
-                    color: red;
-                  }
-                  .MuiSnackbarContent-root {
-                    color: orange;
-                  }
-                  .MuiSnackbarContent-message {
-                    color: orange;
-                  }
-                  .MuiSnackbarContent-action {
-                    color: orange;
-                  }
-                  `,
-                  component: (
-                    <div>
-                      141x
-                      {Math.random()}
-                    </div>
-                  ),
-                },
-              });
-            }}
-          >
-            test simple component
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              log.debug(`${fnName} - onClick`, { props });
-              const gotitOptions = {
-                snackbar: {
-                  open: true,
-                  autoHideDuration: 5000,
-                  anchorOrigin: { vertical: 'top', horizontal: 'right' },
-                  TransitionComponent: Slide,
-                  action: (
-                    <div style={{
-                      display: 'flex', flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center',
-                    }}
-                    >
-                      <Typography
-                        variant="body1"
-                        style={{
-                          display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'center',
-                        }}
-                      >
-                        some cool text
-                      </Typography>
-                      <Button
-                        style={{
-                          alignSelf: 'center',
-                        }}
-                        variant="outlined"
-                        size="small"
-                        onClick={() => { alert('gotit - action test - undo'); }}
-                        sx={{ color: 'secondary.main' }}
-                      >
-                        UNDO
-                      </Button>
-                      <IconButton
-                        color="primary"
-                        onClick={() => { alert('gotit - action test - close'); }}
-                      >
-                        <CloseIcon />
-                      </IconButton>
-                    </div>
-                  ),
-                },
-                gotit: {
-                  component: (
-                    <div>
-                      141x
-                      {Math.random()}
-                    </div>
-                  ),
-                },
-              };
-              displayNotification(gotitOptions);
-            }}
-          >
-            test action
-          </button>
-        </div>
-      );
-    }
-    return null;
-  }, []);
 
   const close = useCallback((event, reason, option) => {
     log.debug(`${fnName} - close`, {
@@ -242,9 +133,6 @@ function Gotit(props) {
 
   return (
     <div className="gotit-notification" style={{ ...props.style }}>
-      {options.debug ? (
-        getDebugUi(state)
-      ) : null}
       <GotitContext.Provider value={{ ...state, dispatch }}>
         {props.children}
         {state.notifications
@@ -255,7 +143,7 @@ function Gotit(props) {
               className={`gotit-${option.gotit.id}`}
               style={{
                 transform: `translateY(${(() => {
-                  const sign = options.stackDirection === 'top' ? -1 : 1;
+                  const sign = option.gotit.stackDirection === 'top' ? -1 : 1;
                   const shift = snackbarArrayRef.current
                     .filter((e, index) => index < i)
                     .reduce((acc, curr) => {

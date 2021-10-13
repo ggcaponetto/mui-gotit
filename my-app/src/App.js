@@ -15,10 +15,12 @@ function ExampleNotificator(){
         gotitContext.displayNotification({
           snackbar: {
             open: true,
-            autoHideDuration: 500000,
+            autoHideDuration: 5000,
             anchorOrigin: { vertical: 'top', horizontal: 'right' },
           },
           gotit: {
+            stackDirection: "bottom",
+            maxSnackbars: 3,
             emotionCssString: `
                   color: red;
                   .MuiSnackbar-root {
@@ -66,7 +68,9 @@ function App() {
         >
           Learn React
         </a>
-        <Gotit>
+        <Gotit
+          debug={true}
+        >
           <ExampleNotificator/>
         </Gotit>
       </header>
