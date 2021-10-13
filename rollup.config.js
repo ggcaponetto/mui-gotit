@@ -27,7 +27,10 @@ export default {
       babelHelpers: 'runtime'
     }),
     commonjs({
-
+      exclude: [],
+      include: [
+        /node_modules/
+      ]
     }),
     resolve({
       // pass custom options to the resolve plugin
