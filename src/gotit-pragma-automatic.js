@@ -2,7 +2,7 @@ import * as React from 'react';
 import {
   useEffect, useState, useRef, useCallback, useReducer,
 } from 'react';
-import log from 'loglevel';
+import * as loglevel from 'loglevel';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import { v4 as uuidv4 } from 'uuid';
@@ -14,12 +14,12 @@ import Slide from '@mui/material/Slide';
 /** @jsxImportSource @emotion/react */
 import { jsx, css } from '@emotion/react'
 
-const logger = log.getLogger('gotit.js');
+const log = loglevel.getLogger('gotit.js');
 
 if (process.env.NODE_ENV === 'production') {
-  logger.setLevel(log.levels.WARN);
+  log.setLevel(log.levels.WARN);
 } else {
-  logger.setLevel(log.levels.DEBUG);
+  log.setLevel(log.levels.DEBUG);
 }
 
 const defaultContext = {
