@@ -12,8 +12,6 @@ export default {
       format: 'cjs',
       sourcemap: true,
       name: 'MUIGotit',
-      preserveModules: true,
-      preserveModulesRoot: 'src'
     },
     {
       exports: "auto",
@@ -21,8 +19,6 @@ export default {
       format: 'esm',
       sourcemap: true,
       name: 'MUIGotit',
-      preserveModules: true,
-      preserveModulesRoot: 'src'
     }
   ],
   plugins: [
