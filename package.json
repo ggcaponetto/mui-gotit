@@ -5,7 +5,7 @@
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "scripts": {
-    "webpack": "webpack --config ./webpack.config.js",
+    "start": "cd my-app && npm start",
     "rollup": "rimraf dist && rollup --config rollup.config.js",
     "npm-autopub": "npm run git-auto && npm run rollup && npm version patch && npm publish",
     "git-auto": "git add . && git commit -m \"autobuild\"",
