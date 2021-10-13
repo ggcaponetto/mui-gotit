@@ -1,16 +1,13 @@
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import { babel } from '@rollup/plugin-babel';
-import peerDepsExternal from 'rollup-plugin-peer-deps-external';
-import jsx from 'rollup-plugin-jsx'
 import path from "path";
-
-const packageJson = require('./package.json');
 
 export default {
   input: 'src/index.js',
   output: [
     {
+      exports: "auto",
       dir: "dist/cjs",
       format: 'cjs',
       sourcemap: true,
@@ -19,6 +16,7 @@ export default {
       preserveModulesRoot: 'src'
     },
     {
+      exports: "auto",
       dir: "dist/esm",
       format: 'esm',
       sourcemap: true,
@@ -31,7 +29,9 @@ export default {
     resolve({
       // pass custom options to the resolve plugin
       customResolveOptions: {
-        moduleDirectory: 'node_modules'
+        moduleDirectories: [
+          'node_modules'
+        ]
       }
     }),
     babel({
@@ -41,14 +41,13 @@ export default {
     commonjs({
       dynamicRequireTargets: [
         // include using a glob pattern (either a string or an array of strings)
-        'node_modules/loglevel/lib/*.js',
-        'node_modules/loglevel/dist/*.js',
+        'node_modules/loglevel/lib/*.js'
       ]
     })
   ],
   external: [
     "react",
-    "@mui",
-    "@emotion"
+    /^@mui/,
+    /^@emotion/,
   ]
 };
