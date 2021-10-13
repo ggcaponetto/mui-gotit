@@ -11,8 +11,6 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import { Typography } from '@mui/material';
 import Slide from '@mui/material/Slide';
-/** @jsxImportSource @emotion/react */
-import { jsx, css } from '@emotion/react'
 
 const log = loglevel.getLogger('gotit.js');
 
@@ -161,14 +159,6 @@ function Gotit(props) {
                   open: true,
                   autoHideDuration: 5000,
                   anchorOrigin: { vertical: 'top', horizontal: 'right' },
-                  /*
-                  ContentProps: {
-                    style: {
-                      color: 'green',
-                    },
-                  },
-                  */
-                  /* css: css``, */
                   TransitionComponent: Slide,
                   action: (
                     <div style={{

@@ -28,6 +28,5 @@ export default {
   external: [
     "react",
     /^@mui/,
-    /^@emotion/,
   ]
 };
