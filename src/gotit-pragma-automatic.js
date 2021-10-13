@@ -267,10 +267,10 @@ function Gotit(props) {
                 })()}px)`,
                 transition: options.transition || 'all 1s',
               }}
-              {...option.snackbar}
               onClose={(event, reason) => {
                 close(event, reason, option);
               }}
+              {...option.snackbar}
             >
               {(() => {
                 if (option.gotit.component && !!option.snackbar.action === false) {
