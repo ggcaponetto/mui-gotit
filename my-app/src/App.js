@@ -16,27 +16,15 @@ function ExampleNotificator(){
             open: true,
             autoHideDuration: 500000,
             anchorOrigin: { vertical: 'top', horizontal: 'right' },
-            ContentProps: {
-              style: {
-                color: 'green',
-              },
-            },
-            css: css`
-              .MuiSnackbarContent-root{
-                color: orange;
-              }
-              .MuiSnackbarContent-action{
-                color: orange;
-              }
-              .MuiSnackbarContent-message{
-                color: orange;
-              }
-              `,
+            emotionCssString:`
+            .MuiAlert-message {
+              color: orange;
+            }`,
           },
           gotit: {
             component: (
               <div>
-                {`a mui-gotit snack `}{Math.random()}
+                {`a simple mui-gotit snack `}{Math.random()}
               </div>
             ),
           },

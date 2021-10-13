@@ -11,6 +11,8 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import { Typography } from '@mui/material';
 import Slide from '@mui/material/Slide';
+/** @jsxImportSource @emotion/react */
+import { css, jsx } from '@emotion/react'
 
 const log = loglevel.getLogger('gotit.js');
 
@@ -261,6 +263,7 @@ function Gotit(props) {
                 close(event, reason, option);
               }}
               {...option.snackbar}
+              css={css`${option.snackbar.emotionCssString}`}
             >
               {(() => {
                 if (option.gotit.component && !!option.snackbar.action === false) {
