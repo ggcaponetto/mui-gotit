@@ -7,18 +7,14 @@ export default {
   input: 'src/index.js',
   output: [
     {
-      exports: "auto",
       dir: "dist/cjs",
       format: 'cjs',
-      sourcemap: true,
-      preserveModules: true
+      sourcemap: true
     },
     {
-      exports: "auto",
       dir: "dist/esm",
       format: 'esm',
-      sourcemap: true,
-      preserveModules: true
+      sourcemap: true
     }
   ],
   plugins: [
@@ -26,20 +22,8 @@ export default {
       configFile: path.resolve(__dirname, 'babel.config.json'),
       babelHelpers: 'runtime'
     }),
-    commonjs({
-      exclude: [],
-      include: [
-        /node_modules/
-      ]
-    }),
-    resolve({
-      // pass custom options to the resolve plugin
-      customResolveOptions: {
-        moduleDirectories: [
-          'node_modules'
-        ]
-      }
-    }),
+    resolve({}),
+    commonjs({})
   ],
   external: [
     "react",
