@@ -39,7 +39,10 @@ export default {
       babelHelpers: 'runtime'
     }),
     commonjs({
-
+      exclude: [],
+      include: [
+        "node_modules"
+      ]
     })
   ],
   external: [
