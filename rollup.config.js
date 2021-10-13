@@ -36,7 +36,7 @@ export default {
     }),
     babel({
       configFile: path.resolve(__dirname, '.babelrc'),
-      babelHelpers: 'bundled'
+      babelHelpers: 'bundle'
     }),
     commonjs({
       exclude: [],
