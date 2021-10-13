@@ -41,7 +41,7 @@ export default {
     commonjs({
       exclude: [],
       include: [
-        "node_modules"
+        /node_modules/
       ]
     })
   ],
