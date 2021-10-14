@@ -27,50 +27,80 @@ const defaultContext = {
 };
 const GotitContext = React.createContext(defaultContext);
 
-const reducer = (prevState, action) => {
-  const fnName = 'Gotit';
-  log.debug(`${fnName} - reducer ${action.type} - old state`, { prevState, action });
-  if (action.type === defaultContext.actions.replace) {
-    const newState = { ...prevState, ...action.payload };
-    log.debug(`${fnName} - reducer ${action.type} - new state`, { action, prevState, newState });
-    return newState;
-  }
-  if (action.type === defaultContext.actions.addNotification) {
-    let max = action.payload.notification.gotit.maxSnackbars;
-    let capped = prevState.notifications;
-    if(prevState.notifications.length >= max){
-      capped = capped.slice(-1 * (max-1));
-    }
-    const newState = {
-      ...prevState,
-      notifications: [
-        ...capped,
-        action.payload.notification,
-      ],
-    };
-    log.debug(`${fnName} - reducer ${action.type} - new state`, { action, prevState, newState });
-    return newState;
-  }
-  if (action.type === defaultContext.actions.removeNotification) {
-    const newState = {
-      ...prevState,
-      notifications: [
-        ...prevState.notifications
-          .filter((option) => option.gotit.id !== action.payload.notification.gotit.id),
-      ],
-    };
-    log.debug(`${fnName} - reducer ${action.type} - new state`, { action, prevState, newState });
-    return newState;
-  }
-  throw new Error('cannot handle action in reducer');
-};
-
 function Gotit(props) {
   const fnName = 'Gotit';
   const [options, setOptions] = useState({
     debug: props.debug || false,
     ...props,
   });
+
+  let notificationSort = useCallback((a, b) => {
+    if(a.gotit.time > b.gotit.time){
+      return -1;
+    } else if(a.gotit.time < b.gotit.time){
+      return 1
+    } else {
+      return 0
+    }
+  }, []);
+
+  let groupBy = useCallback(function groupedObj(objArray, gotitProperty) {
+    let grouped = objArray.reduce((prev, cur) => {
+      let group = cur.gotit[`${gotitProperty}`];
+      if (!prev[group]) {
+        prev[group] = [];
+      }
+      prev[group].push(cur);
+      return prev;
+    }, {});
+    log.debug(`${fnName} - groupBy`, {
+      grouped, objArray, gotitProperty
+    });
+    return grouped;
+  }, []);
+
+
+  const reducer = (prevState, action) => {
+    const fnName = 'Gotit';
+    log.debug(`${fnName} - reducer ${action.type} - old state`, { prevState, action });
+    if (action.type === defaultContext.actions.replace) {
+      const newState = { ...prevState, ...action.payload };
+      log.debug(`${fnName} - reducer ${action.type} - new state`, { action, prevState, newState });
+      return newState;
+    }
+    if (action.type === defaultContext.actions.addNotification) {
+      let group = action.payload.notification.gotit.group;
+      let grouped = groupBy(prevState.notifications, "group")[`${group}`] || [];
+      let max = action.payload.notification.gotit.maxSnackbars;
+      let cappedGroup = grouped.sort(notificationSort).reverse();
+      if(cappedGroup.length >= max){
+        cappedGroup = cappedGroup.slice(-1 * (max-1));
+      }
+      const newState = {
+        ...prevState,
+        notifications: [
+          ...prevState.notifications.filter(notification => notification.gotit.group !== group),
+          ...cappedGroup,
+          action.payload.notification,
+        ],
+      };
+      log.debug(`${fnName} - reducer ${action.type} - new state`, { action, prevState, newState });
+      return newState;
+    }
+    if (action.type === defaultContext.actions.removeNotification) {
+      const newState = {
+        ...prevState,
+        notifications: [
+          ...prevState.notifications
+            .filter((option) => option.gotit.id !== action.payload.notification.gotit.id),
+        ],
+      };
+      log.debug(`${fnName} - reducer ${action.type} - new state`, { action, prevState, newState });
+      return newState;
+    }
+    throw new Error('cannot handle action in reducer');
+  };
+
   const [state, dispatch] = useReducer(reducer, {
     ...defaultContext,
   });
@@ -81,6 +111,7 @@ function Gotit(props) {
       gotit: {
         ...option.gotit,
         id: uuidv4(),
+        time: performance.now()
       },
     };
     dispatch({
@@ -135,36 +166,47 @@ function Gotit(props) {
     <div className="gotit-notification" style={{ ...props.style }}>
       <GotitContext.Provider value={{ ...state, dispatch }}>
         {props.children}
-        {state.notifications
-          .map((option, i) => (
-            <Snackbar
-              ref={(ref) => { snackbarArrayRef.current[i] = ref; }}
-              key={option.gotit.id}
-              className={`gotit-${option.gotit.id}`}
-              style={{
-                transform: `translateY(${(() => {
-                  const sign = option.gotit.stackDirection === 'top' ? -1 : 1;
-                  const shift = snackbarArrayRef.current
-                    .filter((e, index) => index < i)
-                    .reduce((acc, curr) => {
-                      const diff = curr.clientHeight;
-                      return acc + diff;
-                    }, 0) || 0;
-                  return sign * (shift + options.padding);
-                })()}px)`,
-                transition: options.transition || 'all 1.2s',
-              }}
-              onClose={(event, reason) => {
-                close(event, reason, option);
-              }}
-              {...option.snackbar}
-              css={
-                css`${option.gotit.emotionCssString}`
-              }
-            >
-              {option.gotit.component}
-            </Snackbar>
-          ))}
+        {(()=>{
+          let grouped = groupBy(state.notifications, "group");
+          return Object.keys(grouped)
+            .map((key) => {
+              let notificationGroup = grouped[key];
+              return notificationGroup
+                .sort(notificationSort)
+                .map((option, i) => (
+                  <Snackbar
+                    ref={(ref) => { snackbarArrayRef.current[i] = { key, ref }; }}
+                    key={option.gotit.id}
+                    className={`gotit-${option.gotit.id}`}
+                    style={{
+                      transform: `translateY(${(() => {
+                        const sign = option.gotit.stackDirection === 'top' ? -1 : 1;
+                        const shift = snackbarArrayRef.current
+                          .filter((e, index) => {
+                            log.debug(`${fnName} - filtering snackbar`, { i, index, e, key });
+                            return index < i && e.key === key;
+                          })
+                          .reduce((acc, curr) => {
+                            const diff = curr.ref.clientHeight;
+                            return acc + diff + option.gotit.space;
+                          }, 0) || 0;
+                        return sign * (shift);
+                      })()}px)`,
+                      transition: options.transition || 'all 1.2s',
+                    }}
+                    onClose={(event, reason) => {
+                      close(event, reason, option);
+                    }}
+                    {...option.snackbar}
+                    css={
+                      css`${option.gotit.emotionCssString}`
+                    }
+                  >
+                    {option.gotit.component}
+                  </Snackbar>
+                ))
+            })
+        })()}
       </GotitContext.Provider>
     </div>
   );
