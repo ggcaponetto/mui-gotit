@@ -28,7 +28,7 @@ function ExampleNotificator(){
         gotitContext.displayNotification({
           snackbar: {
             open: true,
-            autoHideDuration: 5000000,
+            autoHideDuration: 4000,
             anchorOrigin: { vertical: 'top', horizontal: 'right' },
           },
           gotit: {
@@ -68,7 +68,7 @@ function ExampleNotificator(){
         gotitContext.displayNotification({
           snackbar: {
             open: true,
-            autoHideDuration: 5000000,
+            autoHideDuration: 4000,
             anchorOrigin: { vertical: 'top', horizontal: 'left' },
           },
           gotit: {
@@ -76,6 +76,7 @@ function ExampleNotificator(){
             stackDirection: "bottom",
             maxSnackbars: 5,
             space: 5,
+            fade: true,
             emotionCssString: `
                   color: red;
                   .MuiSnackbar-root {
@@ -102,6 +103,12 @@ function ExampleNotificator(){
         });
       }}>
         test group B
+      </button>
+      <br/>
+      <button onClick={() => {
+        gotitContext.removeNotificationGroup("app-secondary");
+      }}>
+        remove group B
       </button>
     </div>
   )

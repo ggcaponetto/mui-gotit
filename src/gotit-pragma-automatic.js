@@ -21,6 +21,7 @@ const defaultContext = {
     replace: 'replace',
     addNotification: 'addNotification',
     removeNotification: 'removeNotification',
+    removeNotificationGroup: 'removeNotificationGroup',
     updateNotification: 'updateNotification',
   },
   notifications: [],
@@ -44,14 +45,23 @@ function Gotit(props) {
     }
   }, []);
 
-  let groupBy = useCallback(function groupedObj(objArray, gotitProperty) {
-    let grouped = objArray.reduce((prev, cur) => {
-      let group = cur.gotit[`${gotitProperty}`];
-      if (!prev[group]) {
-        prev[group] = [];
+  let groupBy = useCallback((objArray, gotitProperty) => {
+    let grouped = objArray.reduce((acc, curr) => {
+      let group = curr.gotit && curr.gotit[`${gotitProperty}`];
+      if(!group){
+        log.debug(`${fnName} - groupBy - pre`, {
+          group, gotitProperty
+        });
+        throw new Error("the notification has to have a group property");
       }
-      prev[group].push(cur);
-      return prev;
+      if (
+        group && acc[`${group}`] === undefined
+      ) {
+        acc[`${group}`] = [curr];
+      } else {
+        acc[`${group}`].push(curr);
+      }
+      return acc;
     }, {});
     log.debug(`${fnName} - groupBy`, {
       grouped, objArray, gotitProperty
@@ -70,21 +80,25 @@ function Gotit(props) {
     }
     if (action.type === defaultContext.actions.addNotification) {
       let group = action.payload.notification.gotit.group;
-      let grouped = groupBy(prevState.notifications, "group")[`${group}`] || [];
+      let grouped = groupBy(prevState.notifications, "group");
+
+      let groupedByCurrent = grouped[`${group}`] || [];
+      groupedByCurrent.sort(notificationSort).reverse();
+
       let max = action.payload.notification.gotit.maxSnackbars;
-      let cappedGroup = grouped.sort(notificationSort).reverse();
-      if(cappedGroup.length >= max){
-        cappedGroup = cappedGroup.slice(-1 * (max-1));
+      if(groupedByCurrent.length >= max){
+        groupedByCurrent.shift();
       }
+      groupedByCurrent.push(action.payload.notification)
+
       const newState = {
         ...prevState,
         notifications: [
-          ...prevState.notifications.filter(notification => notification.gotit.group !== group),
-          ...cappedGroup,
-          action.payload.notification,
+          ...prevState.notifications.filter(n => n.gotit.group !== group),
+          ...groupedByCurrent,
         ],
       };
-      log.debug(`${fnName} - reducer ${action.type} - new state`, { action, prevState, newState });
+      log.debug(`${fnName} - reducer ${action.type} - new state`, { action, prevState, newState, group });
       return newState;
     }
     if (action.type === defaultContext.actions.removeNotification) {
@@ -98,13 +112,24 @@ function Gotit(props) {
       log.debug(`${fnName} - reducer ${action.type} - new state`, { action, prevState, newState });
       return newState;
     }
+    if (action.type === defaultContext.actions.removeNotificationGroup) {
+      const newState = {
+        ...prevState,
+        notifications: [
+          ...prevState.notifications
+            .filter((option) => option.gotit.group !== action.payload.group),
+        ],
+      };
+      log.debug(`${fnName} - reducer ${action.type} - new state`, { action, prevState, newState });
+      return newState;
+    }
     throw new Error('cannot handle action in reducer');
   };
 
   const [state, dispatch] = useReducer(reducer, {
     ...defaultContext,
   });
-  const snackbarArrayRef = useRef([]);
+  const snackbarArrayRef = useRef({});
   const displayNotification = useCallback((option) => {
     const newOption = {
       ...option,
@@ -120,6 +145,27 @@ function Gotit(props) {
         notification: newOption,
       },
     });
+    return newOption;
+  }, []);
+
+  const removeNotification = useCallback((option) => {
+    dispatch({
+      type: state.actions.removeNotification,
+      payload: {
+        notification: option,
+      },
+    });
+    return option;
+  }, []);
+
+  const removeNotificationGroup = useCallback((group) => {
+    dispatch({
+      type: state.actions.removeNotificationGroup,
+      payload: {
+        group,
+      },
+    });
+    return group;
   }, []);
 
   useEffect(() => {
@@ -144,6 +190,8 @@ function Gotit(props) {
       type: state.actions.replace,
       payload: {
         displayNotification,
+        removeNotification,
+        removeNotificationGroup
       },
     });
   }, [displayNotification]);
@@ -169,29 +217,42 @@ function Gotit(props) {
         {(()=>{
           let grouped = groupBy(state.notifications, "group");
           return Object.keys(grouped)
-            .map((key) => {
-              let notificationGroup = grouped[key];
+            .map((groupKey, keyIndex) => {
+              let notificationGroup = grouped[groupKey];
               return notificationGroup
                 .sort(notificationSort)
-                .map((option, i) => (
+                .map((option, optionIndex) => (
                   <Snackbar
-                    ref={(ref) => { snackbarArrayRef.current[i] = { key, ref }; }}
+                    ref={(ref) => { snackbarArrayRef.current[`key_${keyIndex}_option_${optionIndex}`] = { groupKey, keyIndex, optionIndex, ref }; }}
                     key={option.gotit.id}
                     className={`gotit-${option.gotit.id}`}
                     style={{
                       transform: `translateY(${(() => {
                         const sign = option.gotit.stackDirection === 'top' ? -1 : 1;
-                        const shift = snackbarArrayRef.current
-                          .filter((e, index) => {
-                            log.debug(`${fnName} - filtering snackbar`, { i, index, e, key });
-                            return index < i && e.key === key;
-                          })
+                        const groupedSnackbars = [];
+                        Object.keys(snackbarArrayRef.current).forEach(key => {
+                          if(snackbarArrayRef.current[`${key}`].groupKey === groupKey){
+                            groupedSnackbars.push(snackbarArrayRef.current[`${key}`])
+                          }
+                        });
+                        log.debug(`${fnName} - snacks`, {
+                          snacks: snackbarArrayRef.current, groupedSnackbars
+                        });
+                        const shift = groupedSnackbars
+                          .filter(notification => notification.ref && notification.optionIndex < optionIndex)
                           .reduce((acc, curr) => {
                             const diff = curr.ref.clientHeight;
-                            return acc + diff + option.gotit.space;
+                            return acc + diff + (option.gotit.space || 0);
                           }, 0) || 0;
                         return sign * (shift);
                       })()}px)`,
+                      opacity: `${(() => {
+                        if(option.gotit.fade){
+                          let step = 1 / option.gotit.maxSnackbars;
+                          return 1 - optionIndex * step 
+                        }
+                        return 1;
+                      })()}`,
                       transition: options.transition || 'all 1.2s',
                     }}
                     onClose={(event, reason) => {
