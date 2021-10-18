@@ -1,4 +1,6 @@
-[![forthebadge](https://raw.githubusercontent.com/ggcaponetto/mui-gotit/main/images/gotit-logo.svg)](https://forthebadge.com)
+<p align="center">
+  <img width="600" height="200" src="https://raw.githubusercontent.com/ggcaponetto/mui-gotit/main/images/gotit-logo.svg">
+</p>
 
 # mui-gotit
 [![forthebadge](https://forthebadge.com/images/badges/fuck-it-ship-it.svg)](https://forthebadge.com)
