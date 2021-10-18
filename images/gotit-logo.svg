@@ -7,9 +7,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="297.81235"
-   height="161.80946"
-   viewBox="0 0 78.796183 42.812087"
+   width="800"
+   height="500"
+   viewBox="0 0 211.66665 132.29167"
    version="1.1"
    id="svg8"
    sodipodi:docname="gotit-logo.svg"
@@ -33,9 +33,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.8"
-     inkscape:cx="148.61324"
-     inkscape:cy="86.025982"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="223.63433"
+     inkscape:cy="183.00555"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -78,30 +78,28 @@
     <text
        xml:space="preserve"
        id="text841"
-       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect843);fill:#000000;fill-opacity:1;stroke:none" />
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect843);fill:#000000;fill-opacity:1;stroke:none;" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
-       x="104.97726"
-       y="105.30531"
-       id="text839"
-       transform="translate(-75.370007,-83.92263)"><tspan
+       style="font-style:normal;font-weight:normal;font-size:14.3289px;line-height:1.25;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.895558"
+       x="95.988266"
+       y="96.75322"
+       id="text839"><tspan
          sodipodi:role="line"
          id="tspan837"
-         x="104.97726"
-         y="105.30531"
-         style="font-size:4.23333px;text-align:center;text-anchor:middle;stroke-width:0.264583">enhanced mui snackbars</tspan></text>
+         x="95.988266"
+         y="96.75322"
+         style="font-size:14.3289px;text-align:center;text-anchor:middle;stroke-width:0.895558">enhanced mui snackbars</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:16.93333323px;line-height:1.25;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
-       x="104.82947"
-       y="96.761909"
-       id="text835"
-       transform="translate(-75.370007,-83.92263)"><tspan
+       style="font-style:normal;font-weight:normal;font-size:57.3157px;line-height:1.25;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.895558"
+       x="95.141685"
+       y="73.066238"
+       id="text835"><tspan
          id="tspan833"
-         x="104.82947"
-         y="96.761909"
-         style="text-align:center;text-anchor:middle;stroke-width:0.264583;font-size:16.93333323px;"
+         x="95.141685"
+         y="73.066238"
+         style="font-size:57.3157px;text-align:center;text-anchor:middle;stroke-width:0.895558"
          sodipodi:role="line">gotit</tspan></text>
   </g>
 </svg>
