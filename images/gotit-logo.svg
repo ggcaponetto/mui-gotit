@@ -13,7 +13,7 @@
    version="1.1"
    id="svg8"
    sodipodi:docname="gotit-logo.svg"
-   inkscape:export-filename="C:\Users\Giuseppe\Desktop\gotit-logo.png"
+   inkscape:export-filename="C:\Users\Giuseppe\intellij-workspace\mui-gotit\images\gotit-logo.png"
    inkscape:export-xdpi="96"
    inkscape:export-ydpi="96"
    inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)">
@@ -25,6 +25,19 @@
        width="16.630953"
        height="29.482143"
        id="rect843" />
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter856"
+       x="-8.8788462e-08"
+       width="1.0000002"
+       y="-1.3782089e-07"
+       height="1.0000003">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="9.2548756e-06"
+         id="feGaussianBlur858" />
+    </filter>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -34,10 +47,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.98994949"
-     inkscape:cx="223.63433"
-     inkscape:cy="183.00555"
+     inkscape:cx="413.44049"
+     inkscape:cy="242.7666"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer2"
      inkscape:document-rotation="0"
      showgrid="false"
      units="px"
@@ -66,12 +79,23 @@
   <g
      inkscape:groupmode="layer"
      id="layer2"
-     inkscape:label="Layer 2" />
+     inkscape:label="Layer 2"
+     style="display:inline;filter:url(#filter856)">
+    <rect
+       style="fill:#ffffff;stroke-width:3.96875;stroke-linecap:round"
+       id="rect838"
+       width="250.16428"
+       height="161.16353"
+       x="-18.976137"
+       y="-14.165285" />
+  </g>
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(9.7681016,8.1361607)">
+     transform="translate(9.7681016,8.1361607)"
+     sodipodi:insensitive="true"
+     style="display:inline">
     <g
        id="g851"
        transform="translate(-75.370006,-83.922631)" />
