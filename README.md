@@ -1,9 +1,10 @@
+[![forthebadge](https://raw.githubusercontent.com/ggcaponetto/mui-gotit/main/images/gotit-logo.svg)](https://forthebadge.com)
+
 # mui-gotit
-
 [![forthebadge](https://forthebadge.com/images/badges/fuck-it-ship-it.svg)](https://forthebadge.com)
-[![forthebadge](https://forthebadge.com/images/badges/fuck-it-ship-it.svg)](https://forthebadge.com)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/4135c5b9-2db3-4716-800f-d0a85d93265e/deploy-status)](https://app.netlify.com/sites/nervous-leakey-dd153f/deploys)
 
-A Stacked Snackbar library for Material UI 5 and React 17.
+A Stacked Snackbar library for Material UI >= 5 and React >=17.
 Inpsired by [notistack](https://github.com/iamhosseindhv/notistack) - Working with Material UI 5 Theming and sx property.
 
 ### Installation
