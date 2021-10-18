@@ -1,5 +1,7 @@
 # mui-gotit
 
+[![forthebadge](https://forthebadge.com/images/badges/fuck-it-ship-it.svg)](https://forthebadge.com)
+
 A Stacked Snackbar library for Material UI 5 and React 17.
 Inpsired by [notistack](https://github.com/iamhosseindhv/notistack) - Working with Material UI 5 Theming and sx property.
 

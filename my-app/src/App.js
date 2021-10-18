@@ -7,6 +7,7 @@ import { css, jsx } from '@emotion/react'
 import Alert from '@mui/material/Alert'
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 import { orange } from '@mui/material/colors';
+import Button from '@mui/material/Button'
 
 const theme = createTheme({
   palette: {
@@ -23,6 +24,7 @@ function ExampleNotificator(){
       <div>
         example component using mui-gotit
       </div>
+      <br/>
       <br/>
       <button onClick={() => {
         gotitContext.displayNotification({
@@ -62,6 +64,46 @@ function ExampleNotificator(){
         });
       }}>
         test group A
+      </button>
+      <br/>
+      <button onClick={() => {
+        gotitContext.displayNotification({
+          snackbar: {
+            open: true,
+            autoHideDuration: 4000,
+            anchorOrigin: { vertical: 'bottom', horizontal: 'right' },
+          },
+          gotit: {
+            group: "app-top",
+            stackDirection: "top",
+            maxSnackbars: 3,
+            space: 5,
+            emotionCssString: `
+                  color: red;
+                  .MuiSnackbar-root {
+                    color: red;
+                  }
+                  .MuiSnackbarContent-root {
+                    color: orange;
+                  }
+                  .MuiSnackbarContent-message {
+                    color: orange;
+                  }
+                  .MuiSnackbarContent-action {
+                    color: orange;
+                  }
+                  `,
+            component: (
+              <Alert severity={"error"} sx={{ backgroundColor: 'primary.dark' }}>
+                <div css={css`color: blue`}>
+                  {`a simple mui-gotit snack `}{Math.random()} <Button>click me</Button>
+                </div>
+              </Alert>
+            ),
+          },
+        });
+      }}>
+        test group C (up direction)
       </button>
       <br/>
       <button onClick={() => {

@@ -253,6 +253,16 @@ function Gotit(props) {
                         }
                         return 1;
                       })()}`,
+                      zIndex: `${(() => {
+                        const groupedSnackbars = [];
+                        Object.keys(snackbarArrayRef.current).forEach(key => {
+                          if (snackbarArrayRef.current[
+                          `${key}`].groupKey === groupKey){
+                            groupedSnackbars.push(snackbarArrayRef.current[`${key}`])
+                          }
+                        });
+                        return groupedSnackbars.length - optionIndex;
+                      })()}`,
                       transition: options.transition || 'all 1.2s',
                     }}
                     onClose={(event, reason) => {
