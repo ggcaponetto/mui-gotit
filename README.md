@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="600" height="200" src="https://raw.githubusercontent.com/ggcaponetto/mui-gotit/main/images/gotit-logo.png">
+  <img src="https://raw.githubusercontent.com/ggcaponetto/mui-gotit/main/images/gotit-logo.png">
 </p>
 
 # mui-gotit
