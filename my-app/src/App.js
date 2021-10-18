@@ -1,44 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
 import { Gotit, GotitContext } from "mui-gotit";
-import { useContext } from 'react'
+import React, { useContext } from "react";
 /** @jsxImportSource @emotion/react */
-import { css, jsx } from '@emotion/react'
-import Alert from '@mui/material/Alert'
-import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
-import { orange } from '@mui/material/colors';
-import Button from '@mui/material/Button'
+import { css, jsx } from "@emotion/react";
+import Alert from "@mui/material/Alert";
+import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
+import { orange } from "@mui/material/colors";
+import Button from "@mui/material/Button";
 
 const theme = createTheme({
   palette: {
     primary: {
       main: orange[500]
-    },
-  },
+    }
+  }
 });
 
-function ExampleNotificator(){
+function ExampleNotificator() {
   const gotitContext = useContext(GotitContext);
   return (
     <div>
-      <div>
-        example component using mui-gotit
-      </div>
-      <br/>
-      <br/>
-      <button onClick={() => {
-        gotitContext.displayNotification({
-          snackbar: {
-            open: true,
-            autoHideDuration: 4000,
-            anchorOrigin: { vertical: 'top', horizontal: 'right' },
-          },
-          gotit: {
-            group: "app-main",
-            stackDirection: "bottom",
-            maxSnackbars: 3,
-            space: 15,
-            emotionCssString: `
+      <div>example component using mui-gotit</div>
+      <br />
+      <br />
+      <button
+        onClick={() => {
+          gotitContext.displayNotification({
+            snackbar: {
+              open: true,
+              autoHideDuration: 4000,
+              anchorOrigin: { vertical: "top", horizontal: "right" }
+            },
+            gotit: {
+              group: "app-main",
+              stackDirection: "bottom",
+              maxSnackbars: 3,
+              space: 15,
+              emotionCssString: `
                   color: red;
                   .MuiSnackbar-root {
                     color: red;
@@ -53,32 +50,42 @@ function ExampleNotificator(){
                     color: orange;
                   }
                   `,
-            component: (
-              <Alert severity={"error"} sx={{ backgroundColor: 'primary.dark' }}>
-                <div css={css`color: blue`}>
-                  {`a simple mui-gotit snack `}{Math.random()}
-                </div>
-              </Alert>
-            ),
-          },
-        });
-      }}>
+              component: (
+                <Alert
+                  severity={"error"}
+                  sx={{ backgroundColor: "primary.dark" }}
+                >
+                  <div
+                    css={css`
+                      color: blue;
+                    `}
+                  >
+                    {`a simple mui-gotit snack `}
+                    {Math.random()}
+                  </div>
+                </Alert>
+              )
+            }
+          });
+        }}
+      >
         test group A
       </button>
-      <br/>
-      <button onClick={() => {
-        gotitContext.displayNotification({
-          snackbar: {
-            open: true,
-            autoHideDuration: 4000,
-            anchorOrigin: { vertical: 'bottom', horizontal: 'right' },
-          },
-          gotit: {
-            group: "app-top",
-            stackDirection: "top",
-            maxSnackbars: 3,
-            space: 5,
-            emotionCssString: `
+      <br />
+      <button
+        onClick={() => {
+          gotitContext.displayNotification({
+            snackbar: {
+              open: true,
+              autoHideDuration: 4000,
+              anchorOrigin: { vertical: "bottom", horizontal: "right" }
+            },
+            gotit: {
+              group: "app-top",
+              stackDirection: "top",
+              maxSnackbars: 3,
+              space: 5,
+              emotionCssString: `
                   color: red;
                   .MuiSnackbar-root {
                     color: red;
@@ -93,33 +100,43 @@ function ExampleNotificator(){
                     color: orange;
                   }
                   `,
-            component: (
-              <Alert severity={"error"} sx={{ backgroundColor: 'primary.dark' }}>
-                <div css={css`color: blue`}>
-                  {`a simple mui-gotit snack `}{Math.random()} <Button>click me</Button>
-                </div>
-              </Alert>
-            ),
-          },
-        });
-      }}>
+              component: (
+                <Alert
+                  severity={"error"}
+                  sx={{ backgroundColor: "primary.dark" }}
+                >
+                  <div
+                    css={css`
+                      color: blue;
+                    `}
+                  >
+                    {`a simple mui-gotit snack `}
+                    {Math.random()} <Button>click me</Button>
+                  </div>
+                </Alert>
+              )
+            }
+          });
+        }}
+      >
         test group C (up direction)
       </button>
-      <br/>
-      <button onClick={() => {
-        gotitContext.displayNotification({
-          snackbar: {
-            open: true,
-            autoHideDuration: 4000,
-            anchorOrigin: { vertical: 'top', horizontal: 'left' },
-          },
-          gotit: {
-            group: "app-secondary",
-            stackDirection: "bottom",
-            maxSnackbars: 5,
-            space: 5,
-            fade: true,
-            emotionCssString: `
+      <br />
+      <button
+        onClick={() => {
+          gotitContext.displayNotification({
+            snackbar: {
+              open: true,
+              autoHideDuration: 4000,
+              anchorOrigin: { vertical: "top", horizontal: "left" }
+            },
+            gotit: {
+              group: "app-secondary",
+              stackDirection: "bottom",
+              maxSnackbars: 5,
+              space: 5,
+              fade: true,
+              emotionCssString: `
                   color: red;
                   .MuiSnackbar-root {
                     color: red;
@@ -134,54 +151,47 @@ function ExampleNotificator(){
                     color: orange;
                   }
                   `,
-            component: (
-              <Alert severity={"error"} sx={{ backgroundColor: 'primary.dark' }}>
-                <div css={css`color: green`}>
-                  {`a simple mui-gotit snack `}{Math.random()}
-                </div>
-              </Alert>
-            ),
-          },
-        });
-      }}>
+              component: (
+                <Alert
+                  severity={"error"}
+                  sx={{ backgroundColor: "primary.dark" }}
+                >
+                  <div
+                    css={css`
+                      color: green;
+                    `}
+                  >
+                    {`a simple mui-gotit snack `}
+                    {Math.random()}
+                  </div>
+                </Alert>
+              )
+            }
+          });
+        }}
+      >
         test group B
       </button>
-      <br/>
-      <button onClick={() => {
-        gotitContext.removeNotificationGroup("app-secondary");
-      }}>
+      <br />
+      <button
+        onClick={() => {
+          gotitContext.removeNotificationGroup("app-secondary");
+        }}
+      >
         remove group B
       </button>
-    </div>
-  )
-}
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-          css={css`color: pink;`}
-        >
-          Learn React
-        </a>
-        <ThemeProvider theme={theme}>
-          <Gotit
-            debug={true}
-          >
-            <ExampleNotificator/>
-          </Gotit>
-        </ThemeProvider>
-      </header>
     </div>
   );
 }
 
-export default App;
+export default function App() {
+  return (
+    <div className="App">
+      <ThemeProvider theme={theme}>
+        <Gotit debug={false}>
+          <ExampleNotificator />
+        </Gotit>
+      </ThemeProvider>
+    </div>
+  );
+}

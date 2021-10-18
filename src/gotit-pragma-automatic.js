@@ -263,7 +263,12 @@ function Gotit(props) {
                         });
                         return groupedSnackbars.length - optionIndex;
                       })()}`,
-                      transition: options.transition || 'all 1.2s',
+                      transition: options.transition || `${(()=>{
+                        if(optionIndex == 0){
+                          return 'all 0s'
+                        }
+                        return 'all 1s'
+                      })()}`,
                     }}
                     onClose={(event, reason) => {
                       close(event, reason, option);
