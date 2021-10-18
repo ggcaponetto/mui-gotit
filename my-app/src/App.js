@@ -6,6 +6,8 @@ import Alert from "@mui/material/Alert";
 import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 import { orange } from "@mui/material/colors";
 import Button from "@mui/material/Button";
+import packageJson from "../package.json";
+import libVersion from "mui-gotit/package.json";
 
 const theme = createTheme({
   palette: {
@@ -19,8 +21,7 @@ function ExampleNotificator() {
   const gotitContext = useContext(GotitContext);
   return (
     <div>
-      <div>example component using mui-gotit</div>
-      <br />
+      <div>example component version {packageJson.version} using mui-gotit version {libVersion.version}</div>
       <br />
       <button
         onClick={() => {

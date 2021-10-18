@@ -7,7 +7,7 @@
   "scripts": {
     "start": "cd my-app && npm start",
     "watch": "nodemon --watch src --exec \"npm run autobuild\"",
-    "autobuild": "npm run rollup && cd my-app && npm run link && cd ..",
+    "autobuild": "npm run rollup && cd my-app && npm run link && cd .. && npm run start",
     "rollup": "rimraf dist && rollup --config rollup.config.js",
     "npm-autopub": "npm run git-auto && npm run rollup && npm version patch && npm publish",
     "git-auto": "git add . && git commit -m \"autobuild\"",
