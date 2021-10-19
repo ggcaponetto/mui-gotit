@@ -8,7 +8,8 @@
     "@mui/icons-material": "5.0.3",
     "@mui/material": "5.0.3",
     "cra-template": "1.1.2",
-    "mui-gotit": "^1.0.94",
+    "cypress": "^8.6.0",
+    "mui-gotit": "^1.1.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
@@ -17,10 +18,22 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --watchAll=false",
     "eject": "react-scripts eject",
-    "link": "npm link ../"
+    "link": "npm link ../",
+    "test-all": "npm run test && npm run cypress:run",
+    "cypress:open": "cypress open",
+    "test-ci": "concurrently \"npm run start\" \"wait-on http-get://localhost:3000 && npm run test-all\" --kill-others --success first",
+    "cypress:run": "cypress run --headless"
   },
+  "moduleDirectories": [
+    "node_modules",
+    "src"
+  ],
+  "moduleFileExtensions": [
+    "js",
+    "jsx"
+  ],
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -39,5 +52,11 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^12.1.2",
+    "concurrently": "^6.3.0",
+    "react-test-renderer": "^17.0.2",
+    "wait-on": "^6.0.0"
+  }
 }
