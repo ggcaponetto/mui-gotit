@@ -261,7 +261,11 @@ function Gotit(props) {
                             groupedSnackbars.push(snackbarArrayRef.current[`${key}`])
                           }
                         });
-                        return groupedSnackbars.length - optionIndex;
+                        let base = 0;
+                        if(option.gotit.zIndexBase !== undefined){
+                          base = option.gotit.zIndexBase;
+                        }
+                        return base + groupedSnackbars.length - optionIndex;
                       })()}`,
                       transition: options.transition || `${(()=>{
                         if(optionIndex == 0){

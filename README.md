@@ -117,6 +117,8 @@ let option =
       // maxSnackbars: integer. The max number of notifications that are displayed in a group.
       // The oldest notification will be removed if the max nr of notifications is reached.
       maxSnackbars: 3,
+      // zIndexBase: int. The minimum z-index. Helps to put Snackbars on top of modals. 
+      zIndexBase: 9999,
       // space: number. The distance in pixels from the previous notification
       space: 15,
       // emotionCssString: string. The cssString passed to emotion as a property of the
