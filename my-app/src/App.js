@@ -89,6 +89,7 @@ function ExampleNotificator() {
               group: "app-bottom-right",
               stackDirection: "top",
               maxSnackbars: 3,
+              zIndexBase: 9999,
               space: 5,
               emotionCssString: `
                   color: red;
