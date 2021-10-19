@@ -183,13 +183,13 @@ gotitContext.removeNotification('myGroup');
 
 ### Hack on it
 
-1. edit ``src/gotit-pragma-automatic.js``
-1. start the demo app in watch mode: ``npm run watch``
-1. build the library running ``npm run rollup``
-1. publish it on npm: `npm publish`
+1. Edit ``src/gotit-pragma-automatic.js``
+1. Start the demo app in watch mode: ``npm run watch``
+1. Build the library running ``npm run rollup``
+1. Publish it on npm: `npm publish`
 
 ### Sponsors
 
-This project is used and sponsored by the Cardano platform [141x.io](141x.io).
+This project is used and sponsored by the Cardano platform [https://141x.io](https://141x.io).
 If you like it, send some ADA to the address ``addr1q9dta74g2axw39zf440w67vd0dyq7md4360q4cah3ev72q2hy6re7yfwwt4y246wh3r867l6sjnnlzwseug2t4jp97ps2ajcnh``
 and text me to get listed as a sponsor.
