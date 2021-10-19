@@ -7,7 +7,11 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/4135c5b9-2db3-4716-800f-d0a85d93265e/deploy-status)](https://app.netlify.com/sites/nervous-leakey-dd153f/deploys)
 
 Enhanced Snackbars for Material UI 5 and React 17 with imperative flavor.
-Inpsired by [notistack](https://github.com/iamhosseindhv/notistack) - Working with Material UI 5 Theming and ``sx`` property.
+Inpsired by [notistack](https://github.com/iamhosseindhv/notistack) - Working with Material UI 5 Theming and ``sx``
+property.
+
+This library will be kept as simple as possible to allow easy upgrades to newer versions of MUI and allow anybody to
+customize this library to their need.
 
 ### Live Demo
 * [Codesandbox - Simple](https://codesandbox.io/s/mui-gotit-minimal-u77gw?file=/src/App.js:0-1646)
@@ -158,9 +162,9 @@ let handleOption = gotitContext.displayNotification({...});
 gotitContext.removeNotification(handleOption.gotit.id);
 ````
 
-#### ``gotitContext.removeNotification(notificationId)``
+#### ``gotitContext.removeNotification(notificationHandle)``
 
-Removes the notification. Get the id from the return value of the ``displayNotification`` function.
+Removes the notification. Pass in the return value of the ``displayNotification`` function.
 
 #### ``gotitContext.removeNotificationGroup(notificationGroup)``
 
@@ -177,3 +181,15 @@ gotitContext.removeNotification(handleOption.gotit.group);
 gotitContext.removeNotification('myGroup');
 ````
 
+### Hack on it
+
+1. edit ``src/gotit-pragma-automatic.js``
+1. start the demo app in watch mode: ``npm run watch``
+1. build the library running ``npm run rollup``
+1. publish it on npm: `npm publish`
+
+### Sponsors
+
+This project is used and sponsored by the Cardano platform [141x.io](141x.io).
+If you like it, send some ADA to the address ``addr1q9dta74g2axw39zf440w67vd0dyq7md4360q4cah3ev72q2hy6re7yfwwt4y246wh3r867l6sjnnlzwseug2t4jp97ps2ajcnh``
+and text me to get listed as a sponsor.

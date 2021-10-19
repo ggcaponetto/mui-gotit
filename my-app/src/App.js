@@ -4,7 +4,7 @@ import React, { useContext } from "react";
 import { css, jsx } from "@emotion/react";
 import Alert from "@mui/material/Alert";
 import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
-import { orange } from "@mui/material/colors";
+import { blue } from "@mui/material/colors";
 import Button from "@mui/material/Button";
 import packageJson from "../package.json";
 import libVersion from "mui-gotit/package.json";
@@ -12,7 +12,7 @@ import libVersion from "mui-gotit/package.json";
 const theme = createTheme({
   palette: {
     primary: {
-      main: orange[500]
+      main: blue[500]
     }
   }
 });
@@ -20,10 +20,14 @@ const theme = createTheme({
 function ExampleNotificator() {
   const gotitContext = useContext(GotitContext);
   return (
-    <div>
-      <div>example component version {packageJson.version} using mui-gotit version {libVersion.version}</div>
+    <div style={{display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column'}}>
+      <div style={{display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+        <div>
+          example component version {packageJson.version} using mui-gotit version {libVersion.version}
+        </div>
+      </div>
       <br />
-      <button
+      <Button
         onClick={() => {
           gotitContext.displayNotification({
             snackbar: {
@@ -58,7 +62,7 @@ function ExampleNotificator() {
                 >
                   <div
                     css={css`
-                      color: blue;
+                      color: white;
                     `}
                   >
                     {`a simple mui-gotit snack `}
@@ -70,19 +74,19 @@ function ExampleNotificator() {
           });
         }}
       >
-        test group A
-      </button>
+        test group app-main, top-right, 4s autohide
+      </Button>
       <br />
-      <button
+      <Button
         onClick={() => {
-          gotitContext.displayNotification({
+          let handleOption = gotitContext.displayNotification({
             snackbar: {
               open: true,
               autoHideDuration: 4000,
               anchorOrigin: { vertical: "bottom", horizontal: "right" }
             },
             gotit: {
-              group: "app-top",
+              group: "app-bottom-right",
               stackDirection: "top",
               maxSnackbars: 3,
               space: 5,
@@ -103,16 +107,22 @@ function ExampleNotificator() {
                   `,
               component: (
                 <Alert
-                  severity={"error"}
-                  sx={{ backgroundColor: "primary.dark" }}
+                  severity={"success"}
+                  sx={{ backgroundColor: "primary.light" }}
                 >
                   <div
                     css={css`
-                      color: blue;
+                      color: red;
                     `}
                   >
-                    {`a simple mui-gotit snack `}
-                    {Math.random()} <Button>click me</Button>
+                    {`something random: ${Math.random()} `}
+                    <Button
+                    variant={'contained'}
+                    color={'success'}
+                    onClick={() => {
+                      gotitContext.removeNotification(handleOption);
+                    }}
+                  >gotit (dismiss)</Button>
                   </div>
                 </Alert>
               )
@@ -120,10 +130,10 @@ function ExampleNotificator() {
           });
         }}
       >
-        test group C (up direction)
-      </button>
+        test group app-bottom-right, up direction, 4s autohide, dismiss on click
+      </Button>
       <br />
-      <button
+      <Button
         onClick={() => {
           gotitContext.displayNotification({
             snackbar: {
@@ -132,7 +142,7 @@ function ExampleNotificator() {
               anchorOrigin: { vertical: "top", horizontal: "left" }
             },
             gotit: {
-              group: "app-secondary",
+              group: "app-fade",
               stackDirection: "bottom",
               maxSnackbars: 5,
               space: 5,
@@ -143,44 +153,42 @@ function ExampleNotificator() {
                     color: red;
                   }
                   .MuiSnackbarContent-root {
-                    color: orange;
+                    color: red;
                   }
                   .MuiSnackbarContent-message {
-                    color: orange;
+                    color: red;
                   }
                   .MuiSnackbarContent-action {
-                    color: orange;
+                    color: red;
                   }
                   `,
               component: (
-                <Alert
-                  severity={"error"}
-                  sx={{ backgroundColor: "primary.dark" }}
-                >
-                  <div
-                    css={css`
-                      color: green;
-                    `}
-                  >
-                    {`a simple mui-gotit snack `}
-                    {Math.random()}
+                <div>
+                  <div>
+                    Some other content on top of the alert
                   </div>
-                </Alert>
+                  <Alert
+                    severity={"success"}
+                  >
+                    <div>
+                      {`a success alert with emotion css overrides ${Math.random()}`}
+                    </div>
+                  </Alert>
+                </div>
               )
             }
           });
-        }}
-      >
-        test group B
-      </button>
+        }}>
+        test group app-fade, emotion styling
+      </Button>
       <br />
-      <button
+      <Button
         onClick={() => {
-          gotitContext.removeNotificationGroup("app-secondary");
+          gotitContext.removeNotificationGroup("app-fade");
         }}
       >
-        remove group B
-      </button>
+        remove group app-fade
+      </Button>
     </div>
   );
 }
