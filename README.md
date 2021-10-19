@@ -185,6 +185,7 @@ gotitContext.removeNotification('myGroup');
 
 1. Edit ``src/gotit-pragma-automatic.js``
 1. Start the demo app in watch mode: ``npm run watch``
+1. Run Jest and Cypress tests ``npm run test``
 1. Build the library running ``npm run rollup``
 1. Publish it on npm: `npm publish`
 

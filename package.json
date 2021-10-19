@@ -11,7 +11,7 @@
     "rollup": "rimraf dist && rollup --config rollup.config.js",
     "npm-autopub": "npm run git-auto && npm run rollup && npm version patch && npm publish",
     "git-auto": "git add . && git commit -m \"autobuild\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "cd my-app && npm run test-ci && cd .."
   },
   "author": "Giuseppe Giulio Caponetto",
   "homepage": "https://github.com/ggcaponetto/mui-gotit#readme",
