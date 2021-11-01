@@ -196,3 +196,5 @@ gotitContext.removeNotification('myGroup');
 This project is used and sponsored by the Cardano platform [https://141x.io](https://141x.io).
 If you like it, send some ADA to the address ``addr1q9dta74g2axw39zf440w67vd0dyq7md4360q4cah3ev72q2hy6re7yfwwt4y246wh3r867l6sjnnlzwseug2t4jp97ps2ajcnh``
 and text me to get listed as a sponsor.
+
+Sponsored by [https://www.browserstack.com/](https://www.browserstack.com/).
