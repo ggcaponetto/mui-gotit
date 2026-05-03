@@ -1,4 +1,12 @@
 node_modules
 dist
+coverage
 .idea
+.vscode
+*.log
+.DS_Store
 my-app/dist
+my-app/build
+.env
+.env.local
+.eslintcache
