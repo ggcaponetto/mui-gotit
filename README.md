@@ -14,6 +14,7 @@
   <a href="https://github.com/ggcaponetto/mui-gotit/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/ggcaponetto/mui-gotit/ci.yml?branch=main&style=flat-square" alt="CI"></a>
   <a href="https://github.com/ggcaponetto/mui-gotit/blob/main/LICENSE"><img src="https://img.shields.io/npm/l/mui-gotit.svg?style=flat-square" alt="license"></a>
   <img src="https://img.shields.io/badge/TypeScript-strict-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="typescript">
+  <a href="https://ggcaponetto.github.io/mui-gotit/"><img src="https://img.shields.io/badge/demo-live-22c55e?style=flat-square" alt="live demo"></a>
 </p>
 
 ---
@@ -105,10 +106,9 @@ export default function App() {
 }
 ```
 
-### Live demos
+### Live demo
 
-- [Codesandbox — minimal](https://codesandbox.io/s/mui-gotit-minimal-u77gw?file=/src/App.js)
-- [Codesandbox — customized](https://codesandbox.io/s/mui-gotit-qpyrl?file=/src/App.js)
+[**ggcaponetto.github.io/mui-gotit**](https://ggcaponetto.github.io/mui-gotit/) — interactive playground covering severity, independent groups, fade and stack-cap. Source in [demo/](demo/), built with Vite and deployed automatically by the [Pages workflow](.github/workflows/pages.yml) on every push to `main`.
 
 ---
 

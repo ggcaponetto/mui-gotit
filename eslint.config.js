@@ -7,7 +7,17 @@ import globals from 'globals';
 
 export default [
   {
-    ignores: ['dist', 'my-app', 'node_modules', 'coverage', '*.config.js', '*.config.mjs'],
+    ignores: [
+      'dist',
+      '**/dist/**',
+      'my-app',
+      'demo/node_modules',
+      'demo/dist',
+      'node_modules',
+      'coverage',
+      '*.config.js',
+      '*.config.mjs',
+    ],
   },
   js.configs.recommended,
   ...tseslint.configs.recommended,

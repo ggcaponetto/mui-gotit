@@ -23,7 +23,9 @@
   ],
   "scripts": {
     "build": "rimraf dist && rollup --config rollup.config.mjs",
-    "dev": "cd my-app && npm start",
+    "dev": "cd demo && npm run dev",
+    "demo:install": "cd demo && npm install",
+    "demo:build": "cd demo && npm run build",
     "watch": "rollup --config rollup.config.mjs --watch",
     "test": "jest",
     "test:watch": "jest --watch",
