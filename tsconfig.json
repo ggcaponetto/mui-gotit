@@ -22,5 +22,12 @@
     "types": ["jest", "node"]
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist", "my-app", "**/*.test.ts", "**/*.test.tsx", "src/__tests__/**"]
+  "exclude": [
+    "node_modules",
+    "dist",
+    "cypress",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "src/__tests__/**"
+  ]
 }

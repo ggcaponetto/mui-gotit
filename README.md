@@ -204,7 +204,8 @@ npm run format         # Prettier
 npm run typecheck      # tsc --noEmit
 npm test               # Jest unit tests
 npm run test:coverage  # Jest with coverage report (thresholds enforced)
-npm run test:e2e       # Cypress E2E inside my-app
+npm run test:e2e       # Cypress E2E against the demo (Vite + local src)
+npm run cypress:open   # Open the Cypress UI (demo must already be running)
 npm run build          # Rollup → dist/{cjs,esm} + dist/index.d.ts
 ```
 
@@ -229,7 +230,8 @@ mui-gotit/
 │   ├── index.ts             # Public entry — re-exports
 │   ├── gotit.tsx            # Library implementation
 │   └── __tests__/           # Jest + RTL unit tests
-├── my-app/                  # Demo app + Cypress E2E tests
+├── demo/                    # Vite demo app (aliases `mui-gotit` → src/)
+├── cypress/                 # Cypress 13 E2E specs (run against the demo)
 ├── .github/workflows/ci.yml # Lint + typecheck + test + build (matrix)
 ├── .husky/pre-commit        # Runs lint-staged
 ├── eslint.config.js         # Flat config
@@ -246,6 +248,28 @@ mui-gotit/
 - `*.{json,md,yml,yaml,css}` → `prettier --write`
 
 Skip in emergencies with `git commit --no-verify`.
+
+---
+
+## Publishing to npm
+
+Releases are published manually from a clean `main` checkout. `prepublishOnly`
+runs lint, typecheck, tests and build, so the tarball always reflects a green
+pipeline.
+
+```bash
+# 1. Bump the version (creates a git tag).
+npm version patch    # or: minor | major
+
+# 2. Publish to the public npm registry.
+npm run release
+
+# 3. Push the commit and the new tag.
+git push --follow-tags
+```
+
+You must be logged in (`npm login`) with publish rights to the `mui-gotit`
+package. `npm run release` is a thin wrapper around `npm publish --access public`.
 
 ---
 

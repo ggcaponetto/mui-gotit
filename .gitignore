@@ -5,8 +5,9 @@ coverage
 .vscode
 *.log
 .DS_Store
-my-app/dist
-my-app/build
+cypress/videos
+cypress/screenshots
+cypress/downloads
 .env
 .env.local
 .eslintcache

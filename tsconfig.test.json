@@ -4,5 +4,5 @@
     "noEmit": true
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist", "my-app"]
+  "exclude": ["node_modules", "dist", "cypress"]
 }
