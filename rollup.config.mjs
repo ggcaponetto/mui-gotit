@@ -26,8 +26,8 @@ export default [
       typescript({
         tsconfig: './tsconfig.json',
         declaration: false,
-        declarationDir: undefined,
-        outDir: undefined,
+        declarationMap: false,
+        sourceMap: true,
       }),
     ],
     external,
