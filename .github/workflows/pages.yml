@@ -28,6 +28,12 @@ jobs:
       # The library itself — the demo imports its source via vite alias.
       - run: npm ci
 
+      - name: Test (with coverage)
+        run: npm run test:coverage
+
+      - name: Generate coverage badge JSON
+        run: npm run coverage:badge
+
       - name: Install demo deps
         working-directory: demo
         run: npm install --no-audit --no-fund
