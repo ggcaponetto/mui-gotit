@@ -323,6 +323,44 @@ describe('<Gotit>', () => {
   it('accepts debug=true without throwing', () => {
     expect(() => renderGotit({ debug: true })).not.toThrow();
   });
+
+  it('auto-dismisses a notification when autoHideDuration elapses', () => {
+    jest.useFakeTimers();
+    try {
+      const { getCtx } = renderGotit();
+      act(() => {
+        getCtx().displayNotification!(
+          buildOption({ component: <Alert>auto-bye</Alert> }, { autoHideDuration: 1000 }),
+        );
+      });
+      expect(screen.getByText('auto-bye')).toBeInTheDocument();
+      act(() => {
+        jest.advanceTimersByTime(2000);
+      });
+      expect(screen.queryByText('auto-bye')).not.toBeInTheDocument();
+    } finally {
+      jest.useRealTimers();
+    }
+  });
+
+  it('ignores non-timeout close reasons (e.g. clickaway)', () => {
+    const { getCtx, container } = renderGotit();
+    let handle!: NotificationOption;
+    act(() => {
+      handle = getCtx().displayNotification!(
+        buildOption({ component: <Alert>sticky</Alert> }, { autoHideDuration: null }),
+      );
+    });
+    // Fire onClose with a non-timeout reason directly via the Snackbar's exposed prop.
+    // The notification should remain visible.
+    act(() => {
+      // Click outside the snackbar to trigger MUI's clickaway path.
+      container.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
+      container.dispatchEvent(new MouseEvent('touchstart', { bubbles: true }));
+    });
+    expect(screen.getByText('sticky')).toBeInTheDocument();
+    expect(handle.gotit.id).toBe('uuid-1');
+  });
 });
 
 describe('GotitContext default', () => {
