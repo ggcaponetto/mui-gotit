@@ -20,6 +20,26 @@
 
 ---
 
+> [!WARNING]
+> **You probably don't need this library in 2026.** When `mui-gotit` was first
+> written there was no good imperative, stacked, grouped Snackbar story for
+> MUI. Today there are battle-tested alternatives that cover 95% of use cases:
+>
+> - **[notistack](https://github.com/iamhosseindhv/notistack)** — the obvious
+>   pick if you're on MUI. Stacking, grouping (via `SnackbarKey`), preventDuplicate,
+>   actively maintained, hundreds of thousands of weekly downloads.
+> - **[sonner](https://sonner.emilkowal.ski/)** — framework-agnostic, modern API,
+>   tiny bundle. Pair with MUI theming via a thin wrapper if you want.
+> - **MUI's own `<Snackbar/>` + `useSnackbar`-style hooks you write yourself** —
+>   for simple "one toast at a time" apps, the built-in component is enough.
+>
+> `mui-gotit` is still maintained and works — it just isn't the obvious default
+> anymore. Reach for it if you specifically want its small surface area, the
+> per-notification Emotion `css` string escape hatch, or you're already using
+> it in production.
+
+---
+
 ## Why mui-gotit?
 
 A tiny, opinionated wrapper around MUI's `<Snackbar/>` that adds the things you usually rebuild yourself:
@@ -56,6 +76,30 @@ yarn add mui-gotit
   "react-dom": ">=18.0.0",
 }
 ```
+
+### React 19 / MUI 7 compatibility
+
+| Stack            | Status                                                  |
+| ---------------- | ------------------------------------------------------- |
+| React 18 + MUI 6 | **Tested.** Unit tests + Cypress E2E run on every push. |
+| React 19 + MUI 6 | **Expected to work.** No removed React 18 API is used.  |
+| React 19 + MUI 7 | **Expected to work** — not in CI yet. See note below.   |
+
+The library only depends on the long-stable surface of both ecosystems:
+
+- **React side:** `createContext`, `useReducer`, `useState`, `useRef`,
+  `useEffect`, `useCallback`. No `defaultProps` on function components, no
+  legacy string refs, no `propTypes` — none of the things React 19 removed.
+- **MUI side:** a single import, `@mui/material/Snackbar`, which exists with
+  the same prop shape in MUI 5, 6 and 7. No `Grid` (the big v6 → v7 churn
+  point), no deprecated subpaths.
+- **Styling:** Emotion `@emotion/react` — still MUI 7's default styling
+  engine.
+
+If you want to use it on React 19 / MUI 7 today, the peer-dep ranges already
+allow it (`react: ">=18"`, `@mui/material: ">=6"`). If you hit anything,
+please [open an issue](https://github.com/ggcaponetto/mui-gotit/issues) — a
+React 19 / MUI 7 row in the CI matrix is on the to-do list.
 
 ---
 
