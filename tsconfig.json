@@ -17,10 +17,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "skipLibCheck": true,
-    "declaration": true,
-    "declarationMap": true,
+    "declaration": false,
     "sourceMap": true,
-    "outDir": "dist/types",
     "types": ["jest", "node"]
   },
   "include": ["src/**/*"],

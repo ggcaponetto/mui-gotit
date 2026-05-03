@@ -1,1 +1,7 @@
+#!/usr/bin/env sh
+# Format/lint only the staged files.
 npx lint-staged
+
+# Full project gates — fast enough to run on every commit, and keeps CI honest.
+npm run typecheck
+npm run test -- --bail --silent --passWithNoTests

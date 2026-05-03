@@ -14,7 +14,6 @@
   <a href="https://github.com/ggcaponetto/mui-gotit/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/ggcaponetto/mui-gotit/ci.yml?branch=main&style=flat-square" alt="CI"></a>
   <a href="https://github.com/ggcaponetto/mui-gotit/blob/main/LICENSE"><img src="https://img.shields.io/npm/l/mui-gotit.svg?style=flat-square" alt="license"></a>
   <img src="https://img.shields.io/badge/TypeScript-strict-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="typescript">
-  <a href="https://app.netlify.com/sites/nervous-leakey-dd153f/deploys"><img src="https://api.netlify.com/api/v1/badges/4135c5b9-2db3-4716-800f-d0a85d93265e/deploy-status" alt="Netlify Status"></a>
 </p>
 
 ---
@@ -48,11 +47,11 @@ yarn add mui-gotit
 
 ```jsonc
 {
-  "@emotion/react":   ">=11.13.0",
-  "@emotion/styled":  ">=11.13.0",
-  "@mui/material":    ">=6.0.0",
-  "react":            ">=18.0.0",
-  "react-dom":        ">=18.0.0"
+  "@emotion/react": ">=11.13.0",
+  "@emotion/styled": ">=11.13.0",
+  "@mui/material": ">=6.0.0",
+  "react": ">=18.0.0",
+  "react-dom": ">=18.0.0",
 }
 ```
 
@@ -117,23 +116,23 @@ export default function App() {
 
 ### `<Gotit>` props — `GotitProps`
 
-| Prop         | Type           | Default | Description                                                  |
-| ------------ | -------------- | ------- | ------------------------------------------------------------ |
-| `debug`      | `boolean`      | `false` | Enables `loglevel`-based debug logs.                         |
-| `style`      | `CSSProperties`| `{}`    | Style applied to the `.gotit-notification` wrapper `<div>`.  |
-| `transition` | `string`       | auto    | Override the CSS `transition` shorthand for stacked items.   |
-| `children`   | `ReactNode`    | —       | Your application tree.                                       |
+| Prop         | Type            | Default | Description                                                 |
+| ------------ | --------------- | ------- | ----------------------------------------------------------- |
+| `debug`      | `boolean`       | `false` | Enables `loglevel`-based debug logs.                        |
+| `style`      | `CSSProperties` | `{}`    | Style applied to the `.gotit-notification` wrapper `<div>`. |
+| `transition` | `string`        | auto    | Override the CSS `transition` shorthand for stacked items.  |
+| `children`   | `ReactNode`     | —       | Your application tree.                                      |
 
 ### `GotitContext` — imperative API
 
-| Member                              | Signature                                  | Description                                                  |
-| ----------------------------------- | ------------------------------------------ | ------------------------------------------------------------ |
-| `displayNotification(option)`       | `(option) => NotificationOption`           | Renders a Snackbar. Returns the option enriched with `gotit.id` and `gotit.time`. |
-| `removeNotification(handle)`        | `(handle) => NotificationOption`           | Dismisses a single notification.                             |
-| `removeNotificationGroup(group)`    | `(group: string) => string`                | Dismisses every notification in a group.                     |
-| `notifications`                     | `NotificationOption[]`                     | Current notifications in render order.                       |
-| `actions`                           | `typeof GotitActions`                      | Reducer action-type constants.                               |
-| `dispatch`                          | `Dispatch<Action>`                         | Reducer dispatch (advanced use).                             |
+| Member                           | Signature                        | Description                                                                       |
+| -------------------------------- | -------------------------------- | --------------------------------------------------------------------------------- |
+| `displayNotification(option)`    | `(option) => NotificationOption` | Renders a Snackbar. Returns the option enriched with `gotit.id` and `gotit.time`. |
+| `removeNotification(handle)`     | `(handle) => NotificationOption` | Dismisses a single notification.                                                  |
+| `removeNotificationGroup(group)` | `(group: string) => string`      | Dismisses every notification in a group.                                          |
+| `notifications`                  | `NotificationOption[]`           | Current notifications in render order.                                            |
+| `actions`                        | `typeof GotitActions`            | Reducer action-type constants.                                                    |
+| `dispatch`                       | `Dispatch<Action>`               | Reducer dispatch (advanced use).                                                  |
 
 ### Notification option — `NotificationOptionInput`
 
@@ -141,14 +140,14 @@ export default function App() {
 interface NotificationOptionInput {
   snackbar: SnackbarProps; // Forwarded to MUI <Snackbar/>
   gotit: {
-    group: string;                       // Logical stack name. Required.
-    stackDirection?: 'top' | 'bottom';   // Default 'top'.
-    maxSnackbars: number;                // Cap per group; oldest is dropped.
-    space?: number;                      // Pixel gap between snackbars.
-    fade?: boolean;                      // Fade older snackbars in stack.
-    zIndexBase?: number;                 // Floor z-index — useful above modals.
-    emotionCssString?: string;           // Per-notification Emotion CSS.
-    component: ReactNode;                // Body of the snackbar.
+    group: string; // Logical stack name. Required.
+    stackDirection?: 'top' | 'bottom'; // Default 'top'.
+    maxSnackbars: number; // Cap per group; oldest is dropped.
+    space?: number; // Pixel gap between snackbars.
+    fade?: boolean; // Fade older snackbars in stack.
+    zIndexBase?: number; // Floor z-index — useful above modals.
+    emotionCssString?: string; // Per-notification Emotion CSS.
+    component: ReactNode; // Body of the snackbar.
   };
 }
 ```
@@ -160,7 +159,9 @@ interface NotificationOptionInput {
 ### Dismiss a specific notification
 
 ```tsx
-const handle = gotit.displayNotification!({ /* ... */ });
+const handle = gotit.displayNotification!({
+  /* ... */
+});
 gotit.removeNotification!(handle);
 ```
 
@@ -208,16 +209,16 @@ npm run build          # Rollup → dist/{cjs,esm} + dist/index.d.ts
 
 ### Tooling
 
-| Concern        | Tool                                            |
-| -------------- | ----------------------------------------------- |
-| Language       | TypeScript 5 (strict)                           |
-| Bundler        | Rollup 4 (CJS + ESM + `.d.ts`)                  |
-| Tests          | Jest 29 + ts-jest + jsdom + Testing Library 16  |
-| Lint           | ESLint 9 (flat config) + typescript-eslint 8    |
-| Format         | Prettier 3                                      |
-| Git hooks      | Husky 9 + lint-staged 15 (`pre-commit`)         |
-| CI             | GitHub Actions (Node 18 / 20 / 22)              |
-| Coverage gate  | 90% lines / 90% statements / 90% fns / 80% br   |
+| Concern       | Tool                                           |
+| ------------- | ---------------------------------------------- |
+| Language      | TypeScript 5 (strict)                          |
+| Bundler       | Rollup 4 (CJS + ESM + `.d.ts`)                 |
+| Tests         | Jest 29 + ts-jest + jsdom + Testing Library 16 |
+| Lint          | ESLint 9 (flat config) + typescript-eslint 8   |
+| Format        | Prettier 3                                     |
+| Git hooks     | Husky 9 + lint-staged 15 (`pre-commit`)        |
+| CI            | GitHub Actions (Node 18 / 20 / 22)             |
+| Coverage gate | 90% lines / 90% statements / 90% fns / 80% br  |
 
 ### Project layout
 
@@ -260,7 +261,7 @@ Skip in emergencies with `git commit --no-verify`.
 Issues and PRs are welcome. Please:
 
 1. Open an issue describing the change first if it is non-trivial.
-2. Add or update unit tests under [src/__tests__](src/__tests__).
+2. Add or update unit tests under [src/**tests**](src/__tests__).
 3. Make sure `npm run lint`, `npm run typecheck` and `npm test` pass — coverage thresholds are enforced.
 
 ---
