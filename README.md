@@ -15,7 +15,7 @@
   <a href="https://github.com/ggcaponetto/mui-gotit/blob/main/LICENSE"><img src="https://img.shields.io/npm/l/mui-gotit.svg?style=flat-square" alt="license"></a>
   <img src="https://img.shields.io/badge/TypeScript-strict-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="typescript">
   <a href="https://ggcaponetto.github.io/mui-gotit/"><img src="https://img.shields.io/badge/demo-live-22c55e?style=flat-square" alt="live demo"></a>
-  <a href="https://ggcaponetto.github.io/mui-gotit/coverage.json"><img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fggcaponetto.github.io%2Fmui-gotit%2Fcoverage.json&style=flat-square" alt="coverage"></a>
+  <a href="https://ggcaponetto.github.io/mui-gotit/coverage.json"><img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fggcaponetto.github.io%2Fmui-gotit%2Fcoverage.json%3Fv%3D2&style=flat-square" alt="coverage"></a>
 </p>
 
 ---
